@@ -1,0 +1,14 @@
+# macOS
+.DS_Store
+
+# 에이전트/로컬 설정 (개인 권한·지침)
+.claude/
+CLAUDE.md
+AGENTS.md
+
+# 내부 작업 문서 (공개 X)
+DESIGN.md
+RILLIVE_LANDING.md
+브랜드센터-수정-프롬프트.md
+figma-plugins/
+archive/

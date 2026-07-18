@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rillive · Component States Sheet (Figma import)</title>
+
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+  tailwind.config = { theme: { extend: {
+    colors: { brand: { blue:'#507DFF', mid:'#6A5CFF', purple:'#7D55FF', pink:'#FF5AC8', deep:'#4F5BFF', ink:'#1A1A1A', mist:'#F4F5F8' } },
+    fontFamily: { sans: ['Inter','Pretendard','Noto Sans JP','system-ui','sans-serif'] },
+  } } };
+</script>
+<style>
+  body { font-family:'Inter','Pretendard','Noto Sans JP',sans-serif; -webkit-font-smoothing:antialiased; word-break:keep-all; }
+  .grad-text-d { background:linear-gradient(100deg,#507DFF,#6A5CFF,#7D55FF); -webkit-background-clip:text; background-clip:text; color:transparent; }
+  .grad-bg { background:linear-gradient(120deg,#507DFF,#6A5CFF,#7D55FF); }
+  .glass-dark { background:rgba(255,255,255,0.06); backdrop-filter:blur(14px); border:1px solid rgba(255,255,255,0.12); }
+  .glass-card { background:rgba(255,255,255,0.10); backdrop-filter:blur(16px); border:1px solid rgba(255,255,255,0.18); box-shadow:0 12px 40px -12px rgba(0,0,0,.5); }
+  .pixel { image-rendering:pixelated; image-rendering:crisp-edges; }
+
+  /* iPhone 17 mockup */
+  .iphone{ position:relative; border-radius:2.9rem; padding:6px;
+    background:linear-gradient(155deg,#48484a 0%, #1c1c1e 38%, #000 82%);
+    box-shadow:0 1px 3px rgba(255,255,255,.18) inset,0 -2px 4px rgba(0,0,0,.7) inset,0 30px 60px -25px rgba(60,30,120,.55),0 0 0 1px rgba(0,0,0,.55); }
+  .iphone-screen{ position:relative; border-radius:2.45rem; overflow:hidden; background:#000; }
+  .iphone-screen > img{ display:block; width:100%; height:100%; object-fit:cover; }
+  .dyn-island{ position:absolute; top:2.4%; left:50%; transform:translateX(-50%); width:33%; height:3.4%; min-height:18px; background:#000; border-radius:999px; z-index:6; display:flex; align-items:center; justify-content:flex-end; padding-right:7%; }
+  .dyn-island::after{ content:''; width:7px; height:7px; border-radius:999px; background:radial-gradient(circle at 35% 30%,#2b3a55,#050608 70%); box-shadow:0 0 0 1px rgba(255,255,255,.05); }
+  .iphone::before{ content:''; position:absolute; left:-2px; top:26%; height:13%; width:3px; background:linear-gradient(#3a3a3c,#1c1c1e); border-radius:3px 0 0 3px; }
+  .iphone::after{ content:''; position:absolute; right:-2px; top:30%; height:9%; width:3px; background:linear-gradient(#3a3a3c,#1c1c1e); border-radius:0 3px 3px 0; }
+
+  /* sheet layout helpers */
+  .tile{ border:1px solid #E5E7EB; border-radius:18px; padding:24px; background:#fff; }
+  .tile-dark{ border:1px solid rgba(255,255,255,.08); border-radius:18px; padding:24px; background:#1A1A1A; }
+  .state-label{ font-size:11px; font-weight:700; letter-spacing:.04em; text-transform:uppercase; color:#9CA3AF; }
+  .sec-title{ font-size:13px; font-weight:800; letter-spacing:.12em; text-transform:uppercase; color:#507DFF; }
+</style>
+</head>
+
+<body class="bg-[#F7F8FA] text-brand-ink">
+<div class="mx-auto" style="width:1440px;">
+  <!-- sheet header -->
+  <div class="px-16 pt-16 pb-10">
+    <div class="flex items-center gap-3 mb-3">
+      <span class="w-10 h-10 rounded-[12px] grad-bg flex items-center justify-center">
+        <svg viewBox="106 170 390 260" class="w-7 h-7"><path d="M391.492 174.338C446.733 174.338 491.533 220.152 491.533 276.615C491.533 276.615 500.964 426.338 299.102 426.338C97.2391 426.338 106.671 276.615 106.671 276.615C106.671 220.103 151.47 174.338 206.712 174.338C222.048 174.338 236.572 177.895 249.539 184.179L250.886 184.796C250.886 184.796 302.037 208.686 347.414 184.796C360.695 178.08 375.661 174.338 391.492 174.338ZM232.604 270.992C222.195 270.992 213.757 279.43 213.757 289.839C213.757 300.247 222.195 308.684 232.604 308.684C243.011 308.684 251.449 300.247 251.449 289.839C251.449 279.43 243.012 270.992 232.604 270.992ZM372.603 270.992C362.194 270.992 353.756 279.43 353.756 289.839C353.756 300.247 362.194 308.684 372.603 308.684C383.01 308.684 391.448 300.247 391.448 289.839C391.448 279.43 383.011 270.992 372.603 270.992Z" fill="white"/></svg>
+      </span>
+      <h1 class="text-3xl font-extrabold tracking-tight">Rillive · Components & States</h1>
+    </div>
+    <p class="text-gray-500">상태별로 펼친 컴포넌트 시트 · Figma 임포트 후 각 타일을 Component / Variant로 묶어 사용하세요.</p>
+  </div>
+
+  <!-- ===== 1. BUTTONS ===== -->
+  <section class="px-16 py-10">
+    <div class="sec-title mb-6">01 · Buttons</div>
+    <div class="grid grid-cols-3 gap-6">
+      <!-- store button states -->
+      <div class="tile">
+        <div class="state-label mb-4">Store Button — Default</div>
+        <a class="inline-flex items-center gap-3 rounded-2xl bg-white ring-1 ring-gray-200 text-brand-ink px-6 py-4 font-bold shadow-xl shadow-black/10">
+          <svg viewBox="0 0 24 24" class="w-7 h-7" fill="currentColor"><path d="M17.05 12.04c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.48.83-.72 0-1.83-.81-3-.79-1.54.02-2.96.9-3.75 2.28-1.6 2.78-.41 6.89 1.15 9.14.76 1.1 1.67 2.34 2.86 2.29 1.15-.05 1.58-.74 2.97-.74 1.39 0 1.78.74 3 .72 1.24-.02 2.02-1.12 2.78-2.23.88-1.28 1.24-2.52 1.26-2.58-.03-.01-2.42-.93-2.44-3.69zM14.8 5.18c.63-.77 1.06-1.84.94-2.91-.91.04-2.02.61-2.68 1.37-.59.68-1.1 1.77-.96 2.81 1.02.08 2.06-.52 2.7-1.27z"/></svg>
+          <span class="text-left leading-tight"><span class="block text-[11px] font-medium opacity-60">Download on the</span>App Store</span>
+        </a>
+      </div>
+      <div class="tile">
+        <div class="state-label mb-4">Store Button — Hover (scale 1.05)</div>
+        <a class="inline-flex items-center gap-3 rounded-2xl bg-white ring-1 ring-gray-200 text-brand-ink px-6 py-4 font-bold shadow-2xl shadow-black/20" style="transform:scale(1.05);">
+          <svg viewBox="0 0 24 24" class="w-7 h-7" fill="currentColor"><path d="M17.05 12.04c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.48.83-.72 0-1.83-.81-3-.79-1.54.02-2.96.9-3.75 2.28-1.6 2.78-.41 6.89 1.15 9.14.76 1.1 1.67 2.34 2.86 2.29 1.15-.05 1.58-.74 2.97-.74 1.39 0 1.78.74 3 .72 1.24-.02 2.02-1.12 2.78-2.23.88-1.28 1.24-2.52 1.26-2.58-.03-.01-2.42-.93-2.44-3.69zM14.8 5.18c.63-.77 1.06-1.84.94-2.91-.91.04-2.02.61-2.68 1.37-.59.68-1.1 1.77-.96 2.81 1.02.08 2.06-.52 2.7-1.27z"/></svg>
+          <span class="text-left leading-tight"><span class="block text-[11px] font-medium opacity-60">Download on the</span>App Store</span>
+        </a>
+      </div>
+      <div class="tile">
+        <div class="state-label mb-4">Store Button — Pressed (scale .95)</div>
+        <a class="inline-flex items-center gap-3 rounded-2xl bg-gray-50 ring-1 ring-gray-200 text-brand-ink px-6 py-4 font-bold shadow-md" style="transform:scale(.95);">
+          <svg viewBox="0 0 24 24" class="w-7 h-7" fill="currentColor"><path d="M17.05 12.04c-.02-2.3 1.88-3.4 1.96-3.46-1.07-1.56-2.73-1.78-3.32-1.8-1.41-.14-2.76.83-3.48.83-.72 0-1.83-.81-3-.79-1.54.02-2.96.9-3.75 2.28-1.6 2.78-.41 6.89 1.15 9.14.76 1.1 1.67 2.34 2.86 2.29 1.15-.05 1.58-.74 2.97-.74 1.39 0 1.78.74 3 .72 1.24-.02 2.02-1.12 2.78-2.23.88-1.28 1.24-2.52 1.26-2.58-.03-.01-2.42-.93-2.44-3.69zM14.8 5.18c.63-.77 1.06-1.84.94-2.91-.91.04-2.02.61-2.68 1.37-.59.68-1.1 1.77-.96 2.81 1.02.08 2.06-.52 2.7-1.27z"/></svg>
+          <span class="text-left leading-tight"><span class="block text-[11px] font-medium opacity-60">Download on the</span>App Store</span>
+        </a>
+      </div>
+
+      <!-- gradient pill CTA states -->
+      <div class="tile">
+        <div class="state-label mb-4">Gradient CTA — Default</div>
+        <a class="inline-flex items-center gap-2 rounded-full grad-bg text-white px-8 py-4 font-bold text-lg shadow-xl shadow-brand-purple/30">앱에서 투표 참여하기
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5-5 5M6 12h12"/></svg></a>
+      </div>
+      <div class="tile">
+        <div class="state-label mb-4">Gradient CTA — Hover (scale 1.05 · bright)</div>
+        <a class="inline-flex items-center gap-2 rounded-full grad-bg text-white px-8 py-4 font-bold text-lg shadow-2xl shadow-brand-purple/50" style="transform:scale(1.05);filter:brightness(1.08);">앱에서 투표 참여하기
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5-5 5M6 12h12"/></svg></a>
+      </div>
+      <div class="tile">
+        <div class="state-label mb-4">Gradient CTA — Pressed (scale .95)</div>
+        <a class="inline-flex items-center gap-2 rounded-full grad-bg text-white px-8 py-4 font-bold text-lg shadow-md" style="transform:scale(.95);">앱에서 투표 참여하기
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5-5 5M6 12h12"/></svg></a>
+      </div>
+
+      <!-- header download pill on dark -->
+      <div class="tile-dark">
+        <div class="state-label mb-4" style="color:#6B7280">Nav Download — Default</div>
+        <a class="inline-flex items-center gap-1.5 rounded-full bg-white text-brand-ink px-5 py-2.5 text-[15px] font-bold shadow-lg shadow-black/10">앱 다운로드</a>
+      </div>
+      <div class="tile-dark">
+        <div class="state-label mb-4" style="color:#6B7280">Nav Download — Hover</div>
+        <a class="inline-flex items-center gap-1.5 rounded-full bg-white text-brand-ink px-5 py-2.5 text-[15px] font-bold shadow-xl shadow-black/30" style="transform:scale(1.05);">앱 다운로드</a>
+      </div>
+      <div class="tile-dark">
+        <div class="state-label mb-4" style="color:#6B7280">Nav Download — Pressed</div>
+        <a class="inline-flex items-center gap-1.5 rounded-full bg-gray-100 text-brand-ink px-5 py-2.5 text-[15px] font-bold shadow" style="transform:scale(.95);">앱 다운로드</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 2. NAVIGATION + LANGUAGE DROPDOWN ===== -->
+  <section class="px-16 py-10">
+    <div class="sec-title mb-6">02 · Navigation · Language Dropdown</div>
+    <div class="grid grid-cols-2 gap-6">
+      <div class="tile-dark">
+        <div class="state-label mb-4" style="color:#6B7280">Nav Link — Default / Hover</div>
+        <div class="flex items-center gap-9 text-[15px] font-medium">
+          <span class="text-gray-300">어플 미리보기</span>
+          <span class="text-white">AI 실시간 번역</span>
+          <span class="text-gray-300">글로벌 이벤트</span>
+        </div>
+        <div class="mt-3 flex items-center gap-9 text-[11px] text-gray-500"><span>default</span><span class="ml-1">hover(white)</span><span>default</span></div>
+      </div>
+      <div class="tile-dark">
+        <div class="state-label mb-4" style="color:#6B7280">Lang Toggle — Closed</div>
+        <button class="flex items-center gap-1.5 rounded-full glass-dark px-3 py-2 text-sm font-semibold text-white">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 010 18M12 3a15 15 0 000 18"/></svg>
+          한국어
+          <svg class="w-3 h-3 opacity-70" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+        </button>
+      </div>
+      <div class="tile-dark col-span-2">
+        <div class="state-label mb-4" style="color:#6B7280">Lang Toggle — Open (menu expanded)</div>
+        <div class="inline-flex flex-col items-start">
+          <button class="flex items-center gap-1.5 rounded-full glass-dark px-3 py-2 text-sm font-semibold text-white mb-2">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a15 15 0 010 18M12 3a15 15 0 000 18"/></svg>
+            한국어 <svg class="w-3 h-3 opacity-70" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg>
+          </button>
+          <div class="w-40 rounded-xl bg-white shadow-xl shadow-black/30 overflow-hidden py-1">
+            <div class="px-4 py-2.5 text-sm font-semibold text-brand-ink bg-brand-mist">한국어</div>
+            <div class="px-4 py-2.5 text-sm font-semibold text-brand-ink">English</div>
+            <div class="px-4 py-2.5 text-sm font-semibold text-brand-ink">日本語</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 3. CHIPS · BADGES ===== -->
+  <section class="px-16 py-10">
+    <div class="sec-title mb-6">03 · Chips · Badges</div>
+    <div class="grid grid-cols-3 gap-6">
+      <div class="tile">
+        <div class="state-label mb-4">Category Chip — Default</div>
+        <span class="rounded-full bg-brand-mist text-gray-700 px-4 py-2 text-sm font-semibold">🔥 인기 라이브</span>
+      </div>
+      <div class="tile">
+        <div class="state-label mb-4">Category Chip — Selected</div>
+        <span class="rounded-full grad-bg text-white px-4 py-2 text-sm font-semibold">🍜 먹방·토크</span>
+      </div>
+      <div class="tile">
+        <div class="state-label mb-4">Section Eyebrow</div>
+        <span class="rounded-full bg-brand-purple/10 text-brand-purple px-3.5 py-1.5 text-sm font-semibold tracking-wide">01 · APP PREVIEW</span>
+      </div>
+      <div class="tile-dark">
+        <div class="state-label mb-4" style="color:#6B7280">Status Badge — Live</div>
+        <span class="inline-flex items-center gap-2 rounded-full glass-dark px-4 py-2 text-sm font-semibold text-gray-200"><span class="w-2 h-2 rounded-full bg-emerald-400"></span>프리시즌 데뷔 챌린지 · D-7</span>
+      </div>
+      <div class="tile-dark">
+        <div class="state-label mb-4" style="color:#6B7280">Status Badge — Voting</div>
+        <span class="inline-flex items-center gap-2 rounded-full bg-red-500/20 text-red-300 px-3.5 py-1.5 text-sm font-semibold tracking-wide"><span class="w-2 h-2 rounded-full bg-red-400"></span>NOW VOTING</span>
+      </div>
+      <div class="tile-dark">
+        <div class="state-label mb-4" style="color:#6B7280">Trust Item</div>
+        <span class="inline-flex items-center gap-1.5 text-sm text-gray-400 font-medium"><svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg>번역 정확도 95%</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 4. GLASS CARDS (hero decorations) ===== -->
+  <section class="px-16 py-10">
+    <div class="sec-title mb-6">04 · Glass Cards (Hero Floating)</div>
+    <div class="grid grid-cols-3 gap-6">
+      <div class="tile-dark">
+        <div class="state-label mb-4" style="color:#6B7280">Chat Bubble Card</div>
+        <div class="glass-card inline-block rounded-2xl px-3.5 py-2.5 w-[176px] text-left text-white">
+          <div class="text-[11px] font-bold text-brand-pink">あいか <span class="text-gray-400 font-medium">JP</span></div>
+          <div class="text-xs text-white/90 mt-0.5">かわいすぎる！🥰</div>
+          <div class="text-[11px] text-emerald-300 mt-1">↳ 너무 귀여워요!</div>
+        </div>
+      </div>
+      <div class="tile-dark">
+        <div class="state-label mb-4" style="color:#6B7280">Cheer Card</div>
+        <div class="glass-card inline-flex items-center gap-2.5 rounded-2xl px-4 py-3 text-white">
+          <span class="text-2xl">❤️</span>
+          <div class="text-left leading-tight"><div class="text-base font-extrabold">+128</div><div class="text-[10px] text-gray-300 font-medium">응원 도착</div></div>
+        </div>
+      </div>
+      <div class="tile-dark">
+        <div class="state-label mb-4" style="color:#6B7280">Ranking Card</div>
+        <div class="glass-card inline-flex items-center gap-2 rounded-2xl px-4 py-2.5 text-white">
+          <span class="text-lg">🏆</span><span class="text-sm font-extrabold">Now Ranking #1</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 5. TRANSLATION BUBBLES ===== -->
+  <section class="px-16 py-10">
+    <div class="sec-title mb-6">05 · Translation Bubbles</div>
+    <div class="grid grid-cols-2 gap-6">
+      <div class="tile">
+        <div class="state-label mb-4">JP → KR</div>
+        <div class="flex items-center gap-2.5">
+          <span class="rounded-2xl rounded-bl-md bg-brand-mist px-3.5 py-2.5 text-sm font-medium">かわいすぎる！🥰 <span class="text-gray-400 text-[10px]">JP</span></span>
+          <svg class="w-5 h-5 text-brand-blue shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5-5 5M6 12h12"/></svg>
+          <span class="rounded-2xl rounded-br-md grad-bg text-white px-3.5 py-2.5 text-sm font-medium shadow-md">너무 귀여워요! 🥰</span>
+        </div>
+      </div>
+      <div class="tile">
+        <div class="state-label mb-4">KR → JP</div>
+        <div class="flex items-center gap-2.5">
+          <span class="rounded-2xl rounded-bl-md bg-brand-mist px-3.5 py-2.5 text-sm font-medium">다음 무대 기대할게요 <span class="text-gray-400 text-[10px]">KR</span></span>
+          <svg class="w-5 h-5 text-brand-blue shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5-5 5M6 12h12"/></svg>
+          <span class="rounded-2xl rounded-br-md bg-brand-ink text-white px-3.5 py-2.5 text-sm font-medium shadow-md">次のステージも楽しみ！</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 6. COUNTDOWN · STATS ===== -->
+  <section class="px-16 py-10">
+    <div class="sec-title mb-6">06 · Countdown · Stats</div>
+    <div class="grid grid-cols-2 gap-6">
+      <div class="tile-dark">
+        <div class="state-label mb-4" style="color:#6B7280">Countdown Unit</div>
+        <div class="flex items-center gap-3">
+          <div class="glass-dark rounded-2xl w-24 py-5 text-center text-white"><div class="text-4xl font-extrabold tabular-nums tracking-tight">06</div><div class="text-xs text-gray-400 font-medium mt-1">DAYS</div></div>
+          <div class="glass-dark rounded-2xl w-24 py-5 text-center text-white"><div class="text-4xl font-extrabold tabular-nums tracking-tight">21</div><div class="text-xs text-gray-400 font-medium mt-1">HOURS</div></div>
+          <div class="glass-dark rounded-2xl w-24 py-5 text-center text-white"><div class="text-4xl font-extrabold tabular-nums tracking-tight grad-text-d">45</div><div class="text-xs text-gray-400 font-medium mt-1">SEC</div></div>
+        </div>
+      </div>
+      <div class="tile-dark">
+        <div class="state-label mb-4" style="color:#6B7280">Stat Block</div>
+        <div class="flex items-center gap-12 text-center text-white">
+          <div><div class="text-5xl font-extrabold grad-text-d tracking-tight">95%</div><div class="mt-2 text-sm text-gray-400 font-medium">AI 번역 정확도</div></div>
+          <div><div class="text-5xl font-extrabold grad-text-d tracking-tight">120만+</div><div class="mt-2 text-sm text-gray-400 font-medium">누적 응원 메시지</div></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 7. iPHONE MOCKUP ===== -->
+  <section class="px-16 py-10">
+    <div class="sec-title mb-6">07 · iPhone 17 Mockup (front-facing)</div>
+    <div class="grid grid-cols-4 gap-6">
+      <div class="tile flex flex-col items-center"><div class="state-label mb-4 self-start">Live #1</div><div class="iphone w-[200px]"><div class="iphone-screen aspect-[375/812] bg-black"><div class="dyn-island"></div><img src="assets/app/live1.svg" alt=""></div></div></div>
+      <div class="tile flex flex-col items-center"><div class="state-label mb-4 self-start">Home</div><div class="iphone w-[200px]"><div class="iphone-screen aspect-[375/812] bg-[#262626]"><div class="dyn-island"></div><img src="assets/app/home.svg" alt=""></div></div></div>
+      <div class="tile flex flex-col items-center"><div class="state-label mb-4 self-start">Live #2</div><div class="iphone w-[200px]"><div class="iphone-screen aspect-[375/812] bg-black"><div class="dyn-island"></div><img src="assets/app/live.svg" alt=""></div></div></div>
+      <div class="tile flex flex-col items-center"><div class="state-label mb-4 self-start">Event</div><div class="iphone w-[200px]"><div class="iphone-screen aspect-[375/812] bg-[#262626]"><div class="dyn-island"></div><img src="assets/app/event.svg" alt=""></div></div></div>
+    </div>
+  </section>
+
+  <!-- ===== 8. GROWTH CHARACTERS ===== -->
+  <section class="px-16 py-10 pb-20">
+    <div class="sec-title mb-6">08 · Liver Growth Characters (Lv.1 → STAR)</div>
+    <div class="tile">
+      <div class="flex items-end justify-between gap-2 max-w-3xl">
+        <div class="flex flex-col items-center gap-2 w-16"><div class="h-20 flex items-end"><img src="assets/char/char1-egg.svg" class="pixel w-10" alt=""></div><span class="text-xs font-bold text-gray-500">Lv.1</span></div>
+        <div class="flex flex-col items-center gap-2 w-16"><div class="h-20 flex items-end"><img src="assets/char/char2-orange.svg" class="pixel w-12" alt=""></div><span class="text-xs font-bold text-gray-500">Lv.2</span></div>
+        <div class="flex flex-col items-center gap-2 w-16"><div class="h-20 flex items-end"><img src="assets/char/char3-pink.svg" class="pixel w-12" alt=""></div><span class="text-xs font-bold text-gray-500">Lv.3</span></div>
+        <div class="flex flex-col items-center gap-2 w-16"><div class="h-20 flex items-end"><img src="assets/char/char4-blue.svg" class="pixel w-14" alt=""></div><span class="text-xs font-bold text-gray-500">Lv.4</span></div>
+        <div class="flex flex-col items-center gap-2 w-16"><div class="h-20 flex items-end"><img src="assets/char/char5-star.svg" class="pixel w-16" alt=""></div><span class="text-xs font-extrabold grad-text-d">STAR</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== 9. COLOR / TYPE TOKENS ===== -->
+  <section class="px-16 py-10 pb-24">
+    <div class="sec-title mb-6">09 · Tokens</div>
+    <div class="grid grid-cols-2 gap-6">
+      <div class="tile">
+        <div class="state-label mb-4">Color</div>
+        <div class="flex flex-wrap gap-4">
+          <div class="text-center"><div class="w-16 h-16 rounded-xl" style="background:#507DFF"></div><div class="text-[11px] mt-1 font-semibold">Blue<br>#507DFF</div></div>
+          <div class="text-center"><div class="w-16 h-16 rounded-xl" style="background:#6A5CFF"></div><div class="text-[11px] mt-1 font-semibold">Mid<br>#6A5CFF</div></div>
+          <div class="text-center"><div class="w-16 h-16 rounded-xl" style="background:#7D55FF"></div><div class="text-[11px] mt-1 font-semibold">Purple<br>#7D55FF</div></div>
+          <div class="text-center"><div class="w-16 h-16 rounded-xl" style="background:#FF5AC8"></div><div class="text-[11px] mt-1 font-semibold">Pink<br>#FF5AC8</div></div>
+          <div class="text-center"><div class="w-16 h-16 rounded-xl" style="background:#1A1A1A"></div><div class="text-[11px] mt-1 font-semibold">Ink<br>#1A1A1A</div></div>
+          <div class="text-center"><div class="w-16 h-16 rounded-xl border border-gray-200" style="background:#F4F5F8"></div><div class="text-[11px] mt-1 font-semibold">Mist<br>#F4F5F8</div></div>
+          <div class="text-center"><div class="w-16 h-16 rounded-xl grad-bg"></div><div class="text-[11px] mt-1 font-semibold">Gradient</div></div>
+        </div>
+      </div>
+      <div class="tile">
+        <div class="state-label mb-4">Type Scale (Inter + Pretendard)</div>
+        <div class="space-y-2">
+          <div class="text-5xl font-extrabold tracking-tight">Display · 글로벌 무대</div>
+          <div class="text-3xl font-bold">Section Title · 핵심 기능</div>
+          <div class="text-lg text-gray-500 leading-relaxed">Body · 실시간 AI 번역으로 전 세계 팬과 소통하세요.</div>
+          <div class="text-xs font-semibold text-gray-400 tracking-wide">CAPTION · LABEL</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+</div>
+</body>
+</html>
