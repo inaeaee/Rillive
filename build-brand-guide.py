@@ -10,6 +10,7 @@ rillive-brand-guide.template.html 의 플레이스홀더를 채운다.
 PNG는 Chrome 헤드리스로 투명 배경 렌더. 본문을 고치면 반드시 재빌드(폰트 서브셋).
 """
 import base64
+import datetime
 import io
 import json
 import pathlib
@@ -282,6 +283,9 @@ def main():
     logo_json, zip_bytes = build_logo_package()
     print("메타/프리뷰:")
     build_og_image()
+    # 최종 업데이트일 — 문서가 최신인지 알 수 있게 빌드 시각을 박는다
+    today = datetime.date.today()
+    html = html.replace("__BUILD_DATE__", f"{today.year}. {today.month}. {today.day}.")
     html = html.replace("__HEAD_META__", build_head_meta())
     html = html.replace("__LOGO_JSON__", json.dumps(logo_json, ensure_ascii=False))
     # zip은 data: URL이 아니라 base64 문자열로 심는다 — data: 다운로드는 Chrome이 차단.
