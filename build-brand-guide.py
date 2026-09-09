@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""릴라이브 브랜드센터 빌드.
+"""릴라이브 브랜드 시스템 빌드.
 
 rillive-brand-guide.template.html 의 플레이스홀더를 채운다.
   __FONTFACE__   → 페이지에 쓰인 글자만 서브셋한 Pretendard JP (woff2 data URI)
@@ -161,7 +161,7 @@ png/  투명 배경 래스터 (horizontal 1662px · vertical 1134px · symbol 10
   - 보호 여백: 사방 심볼 높이의 1/2 이상
   - 최소 크기: 락업 96px · 심볼 24px
   - 비율/회전/색 변형, 효과 추가 금지
-  자세한 규정: 릴라이브 브랜드센터 문서를 따릅니다.
+  자세한 규정: 릴라이브 브랜드 시스템 문서를 따릅니다.
 
 (c) Rematch. Rillive Design System이 정본입니다.
 """
@@ -194,12 +194,12 @@ def build_head_meta():
         '<meta name="theme-color" content="#0D0C11">',
         f'<meta name="description" content="{desc}">',
         '<meta property="og:type" content="website">',
-        '<meta property="og:title" content="릴라이브 브랜드센터">',
+        '<meta property="og:title" content="릴라이브 브랜드 시스템">',
         f'<meta property="og:description" content="{desc}">',
         f'<meta property="og:url" content="{BASE_URL}/">',
         f'<meta property="og:image" content="{BASE_URL}/og-image.png">',
         '<meta name="twitter:card" content="summary_large_image">',
-        '<meta name="twitter:title" content="릴라이브 브랜드센터">',
+        '<meta name="twitter:title" content="릴라이브 브랜드 시스템">',
         f'<meta name="twitter:description" content="{desc}">',
         f'<meta name="twitter:image" content="{BASE_URL}/og-image.png">',
     ])
@@ -218,7 +218,7 @@ def build_og_image():
         + svg_wm("#1A1A1A", 0, 0)
         + '</g>'
         '<text x="600" y="470" text-anchor="middle" font-family="sans-serif" '
-        'font-size="30" font-weight="600" fill="#55585F">Brand Center</text>'
+        'font-size="30" font-weight="600" fill="#55585F">Brand System</text>'
         '</svg>'
     )
     out = ROOT / "og-image.png"
