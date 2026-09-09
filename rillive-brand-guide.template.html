@@ -1,3 +1,4 @@
+<html lang="ko">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>릴라이브 브랜드센터</title>
@@ -6,84 +7,60 @@ __HEAD_META__
 __FONTFACE__
 
 /* ── Tokens ─────────────────────────────────────────────
-   릴라이브 디자인 시스템 실측 토큰. 라이트/다크 = Semantic Light/Dark 모드.
-   레이아웃 문법은 원티드 브랜드센터(wanted.co.kr/brandcenter)를 따른다:
-   틴트 바탕 + 큰 흰 라운드 카드 + 인터랙티브 토글 필. */
+   컨셉: 브랜드센터 자체가 하나의 무대다. 바탕은 스테이지 블랙이고
+   콘텐츠는 위에서 떨어지는 조명(스포트라이트)을 받는다.
+   **다크가 기본값** — 라이트는 [data-theme="light"]로 명시 전환할 때만.
+   흰 라운드 카드+그림자(일반적인 브랜드센터 문법) 대신
+   1px 헤어라인으로 구획한 어두운 서페이스를 쓴다. */
 :root {
+  color-scheme: dark;
+
   --brand-a: #507DFF;
   --brand-b: #6A5CFF;
   --brand-c: #7D55FF;
   --brand-grad: linear-gradient(103deg, var(--brand-a) 0%, var(--brand-b) 50%, var(--brand-c) 100%);
 
-  --ground: #F1F0F8;          /* 퍼플 틴트 바탕 — 원티드의 블루 틴트 포지션 */
-  --card: #FFFFFF;
-  --panel: #F7F7F8;
-  --ink: #1A1A1A;
-  --ink-2: #3B3D42;
-  --ink-3: #55585F;
-  --ink-4: #A1A4AC;
-  --line: rgba(112,115,124,.16);
-  --line-soft: rgba(112,115,124,.08);
-  --fill: rgba(112,115,124,.08);
-  --fill-soft: rgba(112,115,124,.05);
-  --primary: #7D55FF;
-  --primary-subtle: #F4F0FF;
-  --positive: #15803D;
-  --negative: #FF4242;
-  --nav-bg: rgba(241,240,248,.86);
-  --seg-bg: rgba(112,115,124,.10);
-  --shadow: 0 1px 2px rgba(26,26,26,.04), 0 8px 28px rgba(26,26,26,.05);
-  --seg-shadow: 0 1px 3px rgba(26,26,26,.14);
+  --ground: #0D0C11;          /* 스테이지 블랙 */
+  --surface: #17161C;
+  --surface-2: #201E27;
+  --ink: #F7F7FA;
+  --ink-2: #C9CAD2;
+  --ink-3: #A5A7B0;
+  --ink-4: #898B95;   /* AA 4.5:1 확보 — 구 #5E606A는 3.1:1 */
+  --line: rgba(255,255,255,.09);
+  --line-strong: rgba(255,255,255,.17);
+  --fill: rgba(255,255,255,.055);
+  --primary: #9B75FF;
+  --positive: #4ADE80;
+  --negative: #FF6B6B;
+  --nav-bg: rgba(13,12,17,.74);
+  --beam-1: rgba(125,85,255,.30);   /* 스포트라이트 코어 */
+  --beam-2: rgba(80,125,255,.14);
+  --spec-ring: rgba(255,255,255,.08);
 
   --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
   --sans: "Pretendard JP", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
 }
-@media (prefers-color-scheme: dark) {
-  :root {
-    --ground: #141318;
-    --card: #1E1C22;
-    --panel: #26242B;
-    --ink: #FAFAFA;
-    --ink-2: #E2E3E6;
-    --ink-3: #A1A4AC;
-    --ink-4: #70737C;
-    --primary: #9B75FF;
-    --primary-subtle: #331B75;
-    --nav-bg: rgba(20,19,24,.86);
-    --seg-bg: rgba(112,115,124,.16);
-    --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 32px rgba(0,0,0,.35);
-    --seg-shadow: 0 1px 3px rgba(0,0,0,.5);
-  }
-}
-:root[data-theme="dark"] {
-  --ground: #141318;
-  --card: #1E1C22;
-  --panel: #26242B;
-  --ink: #FAFAFA;
-  --ink-2: #E2E3E6;
-  --ink-3: #A1A4AC;
-  --ink-4: #70737C;
-  --primary: #9B75FF;
-  --primary-subtle: #331B75;
-  --nav-bg: rgba(20,19,24,.86);
-  --seg-bg: rgba(112,115,124,.16);
-  --shadow: 0 1px 2px rgba(0,0,0,.3), 0 10px 32px rgba(0,0,0,.35);
-  --seg-shadow: 0 1px 3px rgba(0,0,0,.5);
-}
+/* 라이트 = 무대 조명이 꺼진 상태. 퍼플 틴트 바탕이 아니라 종이 흰색 + 헤어라인. */
 :root[data-theme="light"] {
-  --ground: #F1F0F8;
-  --card: #FFFFFF;
-  --panel: #F7F7F8;
-  --ink: #1A1A1A;
+  color-scheme: light;
+  --ground: #FAFAFB;
+  --surface: #FFFFFF;
+  --surface-2: #F3F3F6;
+  --ink: #141318;
   --ink-2: #3B3D42;
-  --ink-3: #55585F;
-  --ink-4: #A1A4AC;
+  --ink-3: #565961;
+  --ink-4: #6B6E76;   /* AA 4.5:1 확보 — 구 #9A9CA4는 2.6:1 */
+  --line: rgba(20,19,24,.10);
+  --line-strong: rgba(20,19,24,.20);
+  --fill: rgba(20,19,24,.04);
   --primary: #7D55FF;
-  --primary-subtle: #F4F0FF;
-  --nav-bg: rgba(241,240,248,.86);
-  --seg-bg: rgba(112,115,124,.10);
-  --shadow: 0 1px 2px rgba(26,26,26,.04), 0 8px 28px rgba(26,26,26,.05);
-  --seg-shadow: 0 1px 3px rgba(26,26,26,.14);
+  --positive: #15803D;
+  --negative: #E0332F;
+  --nav-bg: rgba(250,250,251,.80);
+  --beam-1: rgba(125,85,255,.13);
+  --beam-2: rgba(80,125,255,.07);
+  --spec-ring: rgba(20,19,24,.08);
 }
 
 /* ── Base ───────────────────────────────────────────── */
@@ -105,254 +82,413 @@ p { margin: 0; }
 a { color: inherit; }
 svg { display: block; }
 button { font-family: inherit; }
-:focus-visible { outline: 2px solid var(--primary); outline-offset: 3px; border-radius: 6px; }
+/* 포커스 링 — 흰 링 + 어두운 후광. 컬러 밴드 위에서도 사라지지 않는다.
+   (밴드는 .gels의 overflow:hidden에 잘리므로 안쪽으로 그린다) */
+:focus-visible { outline: 2px solid #FFFFFF; outline-offset: 2px; box-shadow: 0 0 0 5px rgba(10,10,14,.92); }
 
-.wrap { max-width: 1020px; margin: 0 auto; padding: 0 24px; }
+.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
+.kicker {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--ink-4);
+}
+.wrap { max-width: 1080px; margin: 0 auto; padding: 0 28px; }
 
-/* ── Nav ────────────────────────────────────────────── */
+/* ── Top bar — 링크 필 없이 얇은 풀블리드 바 ────────── */
 .nav {
-  position: sticky; top: 0; z-index: 30;
-  background: var(--nav-bg); backdrop-filter: blur(14px);
+  position: sticky; top: 0; z-index: 40;
+  background: var(--nav-bg); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--line);
 }
 .nav-host { position: relative; }
 .nav-in {
-  max-width: 1020px; margin: 0 auto; padding: 13px 24px;
-  display: flex; align-items: center; gap: 20px;
+  max-width: 1080px; margin: 0 auto; padding: 0 28px; height: 60px;
+  display: flex; align-items: center; gap: 14px;
 }
-.nav-mark { display: flex; align-items: center; gap: 9px; flex: none; text-decoration: none; }
-.nav-mark svg { width: 24px; height: 24px; }
-.nav-mark b { font-size: 15px; font-weight: 700; letter-spacing: -.02em; }
-.nav-links {
-  display: flex; gap: 4px; margin-left: auto; overflow-x: auto;
-  scrollbar-width: none;
+.nav-mark { display: flex; align-items: center; gap: 10px; flex: none; text-decoration: none; margin-right: auto; }
+.nav-mark svg { width: 26px; height: 26px; }
+.nav-mark b { font-size: 14.5px; font-weight: 700; letter-spacing: -.02em; }
+.nav-mark .ver {
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em;
+  color: var(--ink-4); padding-left: 10px; margin-left: 2px;
+  border-left: 1px solid var(--line);
 }
-.nav-links::-webkit-scrollbar { display: none; }
-.nav-links a {
-  flex: none; padding: 7px 12px; border-radius: 9px;
-  font-size: 13.5px; font-weight: 600; color: var(--ink-2);
-  text-decoration: none; white-space: nowrap;
-  transition: background .15s, color .15s;
-}
-.nav-links a:hover { background: var(--fill); }
-.nav-links a[aria-current="true"] { color: var(--primary); background: var(--primary-subtle); }
-.tog {
-  flex: none; height: 36px; padding: 0 14px; border-radius: 10px;
-  border: 1px solid var(--primary); background: transparent;
-  color: var(--primary); cursor: pointer; font-size: 13px; font-weight: 600;
-  transition: background .15s; text-decoration: none;
-  display: inline-flex; align-items: center;
-}
-.tog:hover { background: var(--primary-subtle); }
-.tog-ic { padding: 0 11px; border-color: var(--line); color: var(--ink-3); }
 
-/* ── Hero — 타이포 스테이트먼트 ─────────────────────── */
-.hero { padding: clamp(64px, 10vw, 128px) 0 clamp(40px, 6vw, 72px); }
+/* 1순위 액션만 브랜드 그라데이션을 입는다 */
+.btn-grad {
+  flex: none; height: 36px; padding: 0 16px; border: 0; border-radius: 10px;
+  background: var(--brand-grad); color: #FFFFFF;
+  font-size: 13px; font-weight: 700; letter-spacing: -.01em;
+  cursor: pointer; display: inline-flex; align-items: center; gap: 8px;
+  text-decoration: none; transition: filter .15s, transform .12s;
+}
+.btn-grad:hover { filter: brightness(1.08); }
+.btn-grad:active { transform: translateY(1px); }
+.btn-grad svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+
+.icon-btn {
+  flex: none; width: 36px; height: 36px; border-radius: 10px;
+  border: 1px solid var(--line); background: transparent; color: var(--ink-3);
+  cursor: pointer; display: grid; place-items: center; transition: border-color .15s, color .15s;
+}
+.icon-btn:hover { border-color: var(--line-strong); color: var(--ink); }
+.icon-btn svg { width: 16px; height: 16px; }
+.icon-btn .ic-light { display: none; }
+:root[data-theme="light"] .icon-btn .ic-dark { display: none; }
+:root[data-theme="light"] .icon-btn .ic-light { display: block; }
+
+/* ── Chapter rail — 큐시트 ───────────────────────────
+   와이드에서는 화면 왼쪽에 고정된 세로 큐시트,
+   좁은 화면에서는 상단 바 아래 가로 스트립으로 접힌다. */
+.rail {
+  position: fixed; top: 50%; transform: translateY(-50%);
+  left: max(16px, calc(50vw - 690px)); z-index: 35;   /* 본문(1080) 왼쪽에서 최소 32px 떨어뜨린다 */
+  display: none; flex-direction: column; gap: 2px;
+}
+.rail a {
+  display: flex; align-items: center; gap: 10px;
+  padding: 7px 10px 7px 12px; border-radius: 8px;
+  text-decoration: none; color: var(--ink-4);
+  border-left: 2px solid transparent;
+  transition: color .18s, border-color .18s, background .18s;
+}
+.rail a i {
+  font-family: var(--mono); font-style: normal; font-size: 10.5px;
+  letter-spacing: .08em; opacity: .8;
+}
+.rail a span { font-size: 12.5px; font-weight: 600; letter-spacing: -.01em; white-space: nowrap; }
+.rail a:hover { color: var(--ink-2); background: var(--fill); }
+.rail a[aria-current="true"] {
+  color: var(--ink); border-left-color: transparent;
+  background: linear-gradient(90deg, rgba(125,85,255,.16), transparent 78%);
+}
+.rail a[aria-current="true"] i {
+  background: var(--brand-grad); -webkit-background-clip: text; background-clip: text;
+  color: transparent; opacity: 1;
+}
+@media (min-width: 1400px) { .rail { display: flex; } }
+@media (max-width: 1399px) {
+  .rail {
+    position: sticky; top: 60px; left: auto; transform: none;
+    display: flex; flex-direction: row; gap: 2px;
+    max-width: 1080px; margin: 0 auto; padding: 8px 28px;
+    overflow-x: auto; scrollbar-width: none;
+    background: var(--nav-bg); backdrop-filter: blur(16px);
+    border-bottom: 1px solid var(--line);
+  }
+  .rail::-webkit-scrollbar { display: none; }
+  .rail a { flex: none; border-left: 0; padding: 6px 11px; }
+  .rail a[aria-current="true"] { background: var(--fill); }
+}
+
+/* ── Hero — 스포트라이트가 켜지는 순간 ──────────────── */
+.hero {
+  position: relative; overflow: hidden; isolation: isolate;
+  padding: clamp(72px, 11vw, 132px) 0 clamp(40px, 5vw, 64px);
+  text-align: center;
+}
+/* 위에서 떨어지는 원뿔형 조명 */
+.hero::before {
+  content: ""; position: absolute; z-index: -1;
+  left: 50%; top: -34%; width: min(1100px, 140vw); aspect-ratio: 1 / 1;
+  transform: translateX(-50%);
+  background: radial-gradient(circle at 50% 40%, var(--beam-1) 0%, var(--beam-2) 34%, transparent 66%);
+  pointer-events: none;
+}
+.hero-lock { display: inline-flex; align-items: center; gap: 18px; margin-bottom: 30px; }
+.hero-lock .u-mk { width: 52px; height: 52px; }
+.hero-lock .u-wm { height: 38px; width: auto; fill: var(--ink); }
 .hero h1 {
-  font-size: clamp(26px, 3.6vw, 40px); font-weight: 700;
-  line-height: 1.42; letter-spacing: -.032em;
+  font-size: clamp(25px, 3.5vw, 39px); font-weight: 700;
+  line-height: 1.44; letter-spacing: -.034em;
+  max-width: 30ch; margin: 0 auto;
 }
-.hero .accent { color: var(--primary); }
+.hero .eyebrow { margin-bottom: 18px; }
+.hero-meta {
+  margin-top: 32px; display: flex; justify-content: center; align-items: center;
+  gap: 14px; flex-wrap: wrap;
+}
+.hero-meta .note { font-family: var(--mono); font-size: 11px; letter-spacing: .08em; color: var(--ink-4); }
+/* 무대 바닥 — 조명이 끝나는 선 */
+.stage-line {
+  height: 1px; border: 0; margin: clamp(32px, 4.5vw, 48px) 0 0;
+  background: linear-gradient(90deg, transparent, var(--line-strong) 22%, var(--line-strong) 78%, transparent);
+}
 
-/* ── Chapter / Section headers ──────────────────────── */
-.chapter { padding-top: clamp(56px, 9vw, 110px); }
-.chapter-title { font-size: clamp(26px, 3.4vw, 36px); font-weight: 700; letter-spacing: -.03em; }
-.section { padding-top: clamp(40px, 6vw, 64px); }
-.sec-head { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
-.sec-head h3 { font-size: clamp(19px, 2.3vw, 24px); font-weight: 700; letter-spacing: -.025em; }
-.anchor-ic {
-  width: 28px; height: 28px; border-radius: 8px; background: var(--fill);
-  display: grid; place-items: center; color: var(--ink-4); flex: none;
-  font-size: 13px; text-decoration: none;
+/* ── Chapter / Section ──────────────────────────────── */
+.chapter { padding-top: clamp(56px, 7.5vw, 96px); scroll-margin-top: 120px; }
+.ch-head { display: flex; align-items: center; gap: 16px; }
+.ch-num {
+  font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: .18em;
+  background: var(--brand-grad); -webkit-background-clip: text; background-clip: text;
+  color: transparent; flex: none;
 }
-.sec-desc { margin-top: 10px; color: var(--ink-3); font-size: 14.5px; max-width: 68ch; }
+.ch-title { font-size: clamp(24px, 3.2vw, 33px); font-weight: 700; letter-spacing: -.032em; flex: none; }
+.ch-rule { flex: 1; height: 1px; background: var(--line); }
+
+.section { padding-top: clamp(36px, 5.5vw, 56px); scroll-margin-top: 120px; }
+.sec-head { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+.sec-head h3 { font-size: clamp(17px, 2vw, 21px); font-weight: 700; letter-spacing: -.025em; }
+/* 앵커는 상시 노출 — hover로만 뜨면 터치 기기에서 영영 보이지 않는다.
+   히트 영역도 24×24 이상 확보. */
+.anchor {
+  font-family: var(--mono); font-size: 14px; color: var(--ink-4);
+  text-decoration: none; opacity: .55; line-height: 1;
+  padding: 6px 9px; border-radius: 8px;
+  transition: opacity .15s, color .15s, background .15s;
+}
+.sec-head:hover .anchor, .anchor:hover, .anchor:focus-visible {
+  opacity: 1; color: var(--ink-2); background: var(--fill);
+}
 .sec-head .side-btn { margin-left: auto; }
+.sec-desc { margin-top: 8px; color: var(--ink-3); font-size: 14px; max-width: 66ch; }
 
-/* ── Card ───────────────────────────────────────────── */
-.card {
-  background: var(--card); border-radius: 24px; box-shadow: var(--shadow);
-  padding: clamp(24px, 3.4vw, 36px); margin-top: 24px;
+/* ── Panel — 그림자 없는 헤어라인 서페이스 ──────────── */
+.panel {
+  background: var(--surface); border: 1px solid var(--line);
+  border-radius: 16px; margin-top: 20px; overflow: hidden;
 }
-.card-title { font-size: 19px; font-weight: 700; letter-spacing: -.02em; }
-.card-desc { margin-top: 10px; color: var(--ink-3); font-size: 14px; max-width: 52ch; }
-.grid { display: grid; gap: 20px; margin-top: 24px; }
+.panel-pad { padding: clamp(20px, 2.6vw, 30px); }
+.panel-title { font-size: 16.5px; font-weight: 700; letter-spacing: -.02em; }
+.panel-desc { margin-top: 8px; color: var(--ink-3); font-size: 13.5px; max-width: 54ch; }
+.grid { display: grid; gap: 16px; margin-top: 20px; }
 .g2 { grid-template-columns: repeat(2, 1fr); }
 .g3 { grid-template-columns: repeat(3, 1fr); }
 
-/* ── Segmented control (원티드 토글 필) ─────────────── */
-.opt-row { display: flex; align-items: center; gap: 14px; margin-top: 14px; }
-.opt-row .lbl { font-size: 13px; font-weight: 700; flex: none; min-width: 62px; }
-.seg {
-  display: inline-flex; background: var(--seg-bg); border-radius: 999px; padding: 3px;
-}
-.seg button {
-  border: 0; background: transparent; color: var(--ink-4);
-  font-size: 13px; font-weight: 600; padding: 6px 16px; border-radius: 999px;
-  cursor: pointer; transition: background .15s, color .15s;
-}
-.seg button[aria-pressed="true"] {
-  background: var(--card); color: var(--ink); box-shadow: var(--seg-shadow);
-}
-
-/* ── Buttons ────────────────────────────────────────── */
-.btn {
-  display: inline-flex; align-items: center; gap: 7px;
-  height: 42px; padding: 0 20px; border-radius: 12px;
-  border: 1px solid var(--primary); background: transparent;
-  color: var(--primary); font-size: 14px; font-weight: 600;
-  cursor: pointer; text-decoration: none; transition: background .15s;
-}
-.btn:hover { background: var(--primary-subtle); }
-.btn-sm { height: 34px; padding: 0 14px; font-size: 12.5px; border-radius: 9px; }
-
-/* ── Logo specimen panel (인터랙티브) ───────────────── */
-.spec-panel {
-  border-radius: 18px; min-height: 300px;
-  display: grid; place-items: center; padding: 40px;
+/* ── Stage card — 스페시먼이 위, 조작부는 아래 툴바 ───
+   (좌측 설명 + 우측 스페시먼 2단 구성을 쓰지 않는다) */
+.stage {
+  position: relative; min-height: 264px;
+  display: grid; place-items: center; padding: 48px 40px;
   transition: background .25s;
 }
-.spec-panel .lock { display: flex; align-items: center; gap: 22px; color: var(--sp-ink); }
-.spec-panel .u-mk { width: 64px; height: 64px; }
-.spec-panel .u-wm { height: 48px; width: auto; fill: currentColor; }
-/* 상태: data-bg × data-logo — <use> 섀도우 트리는 하위 선택자가 안 통하므로
-   커스텀 속성(--mono-face)과 currentColor로만 제어한다 */
-.spec-panel[data-bg="light"] { background: #F7F7F8; --mono-face: #F7F7F8; --sp-ink: #1A1A1A; color: #1A1A1A; }
-.spec-panel[data-bg="dark"]  { background: #14191E; --mono-face: #14191E; --sp-ink: #FFFFFF; color: #FFFFFF; }
-.spec-panel .u-color { display: block; }
-.spec-panel .u-mono { display: none; }
-.spec-panel[data-logo="mono"] .u-color { display: none; }
-.spec-panel[data-logo="mono"] .u-mono { display: block; }
+.stage::after {
+  content: ""; position: absolute; inset: 0; pointer-events: none;
+  background: radial-gradient(ellipse 68% 58% at 50% 22%, rgba(255,255,255,.07), transparent 70%);
+}
+.stage .lock { display: flex; align-items: center; gap: 22px; }
+.stage .u-mk { width: 60px; height: 60px; }
+.stage .u-wm { height: 44px; width: auto; fill: currentColor; }
+/* 스페시먼 배경은 뷰어 테마를 따라가면 안 된다 — "흰 배경 위 블랙 로고"가
+   다크에서 거짓이 되면 안 되므로 하드코딩. <use> 섀도우 트리는 하위 선택자가
+   안 통하므로 상속되는 커스텀 속성(--mono-face)과 currentColor로만 제어한다. */
+.stage[data-bg="light"] { background: #FFFFFF; --mono-face: #FFFFFF; color: #14191E; }
+.stage[data-bg="dark"]  { background: #14191E; --mono-face: #14191E; color: #FFFFFF; }
+.stage .u-color { display: block; }
+.stage .u-mono { display: none; }
+.stage[data-logo="mono"] .u-color { display: none; }
+.stage[data-logo="mono"] .u-mono { display: block; }
 .mk-face { fill: var(--mono-face, #FFFFFF); }
 .mk-rect { fill: var(--mk-fill, url(#rl-grad)); }
 .mk-rect-mono { fill: currentColor; }
 
-.spec-split { display: grid; grid-template-columns: minmax(240px, 1fr) 1.6fr; gap: 28px; align-items: start; }
-.spec-side { display: flex; flex-direction: column; min-height: 300px; }
-.spec-side .opts { margin-top: auto; padding-top: 20px; }
+/* 좌상단 상태 표기 — 지금 무슨 조합을 보고 있는지 */
+.state {
+  position: absolute; left: 16px; top: 14px; z-index: 1;
+  font-family: var(--mono); font-size: 11px; letter-spacing: .13em;
+  color: currentColor; opacity: .72;
+}
+.stage[data-bg="light"][data-logo="color"] .state::after { content: "LIGHT / COLOR"; }
+.stage[data-bg="light"][data-logo="mono"]  .state::after { content: "LIGHT / MONO"; }
+.stage[data-bg="dark"][data-logo="color"]  .state::after { content: "DARK / COLOR"; }
+.stage[data-bg="dark"][data-logo="mono"]   .state::after { content: "DARK / MONO"; }
 
-/* 조합(락업) 미니 패널 */
+.toolbar {
+  border-top: 1px solid var(--line);
+  padding: 18px clamp(20px, 2.6vw, 28px);
+  display: flex; align-items: flex-end; gap: 24px; flex-wrap: wrap;
+}
+.tb-text { flex: 1 1 300px; min-width: 0; }
+.tb-ctrl { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; margin-left: auto; }
+
+/* ── Switch — 필 세그먼트 대신 밑줄 스위치 ──────────── */
+.switch { display: flex; align-items: center; gap: 12px; }
+.switch .lbl {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .13em;
+  text-transform: uppercase; color: var(--ink-4); flex: none;
+}
+.seg { display: inline-flex; gap: 2px; }
+.seg button {
+  position: relative; border: 0; background: transparent; color: var(--ink-4);
+  font-family: var(--mono); font-size: 11.5px; letter-spacing: .06em;
+  text-transform: uppercase; padding: 9px 4px 11px; margin: 0 7px;
+  cursor: pointer; transition: color .15s;
+}
+.seg button:first-child { margin-left: 0; }
+.seg button::after {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 5px; height: 2px;
+  border-radius: 2px; background: var(--brand-grad);
+  transform: scaleX(0); transform-origin: 50% 50%; transition: transform .18s;
+}
+.seg button:hover { color: var(--ink-2); }
+.seg button[aria-pressed="true"] { color: var(--ink); }
+.seg button[aria-pressed="true"]::after { transform: scaleX(1); }
+/* 밝은 스페시먼 위에 얹히는 스위치(필요 시) */
+.on-spec .seg button[aria-pressed="true"] { color: inherit; }
+
+/* ── Buttons ────────────────────────────────────────── */
+.btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  height: 38px; padding: 0 16px; border-radius: 10px;
+  border: 1px solid var(--line-strong); background: transparent;
+  color: var(--ink); font-size: 13px; font-weight: 600;
+  cursor: pointer; text-decoration: none; transition: background .15s, border-color .15s;
+}
+.btn:hover { background: var(--fill); border-color: var(--ink-4); }
+.btn svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+.btn-sm { height: 30px; padding: 0 12px; font-size: 12px; border-radius: 8px; }
+
+/* ── Lockup 미니 스페시먼 ───────────────────────────── */
 .mini-spec {
-  border-radius: 16px; background: var(--panel);
-  display: grid; place-items: center; min-height: 168px; padding: 26px;
+  border: 1px solid var(--line); border-radius: 12px; background: var(--surface-2);
+  display: grid; place-items: center; min-height: 156px; padding: 26px;
   position: relative; color: var(--ink);
-  --mono-face: var(--panel);
+  --mono-face: var(--surface-2);
 }
 .mini-spec .cap {
-  position: absolute; left: 14px; top: 12px;
-  font-family: var(--mono); font-size: 9.5px; letter-spacing: .07em;
+  position: absolute; left: 13px; top: 11px;
+  font-family: var(--mono); font-size: 9.5px; letter-spacing: .12em;
   text-transform: uppercase; color: var(--ink-4);
 }
 .mini-spec .lock { display: flex; align-items: center; gap: 13px; }
 .mini-spec .lock.v { flex-direction: column; gap: 10px; }
 .mini-spec .wm-fixed { fill: var(--ink); }
 
-/* ── Clear space / min size ─────────────────────────── */
-.clear-panel {
-  border-radius: 16px; background: var(--panel);
-  display: grid; place-items: center; min-height: 240px; padding: 40px;
-  --mono-face: var(--panel);
+/* ── 여백 · 최소 크기 ───────────────────────────────── */
+.measure {
+  border-radius: 12px; background: var(--surface-2); border: 1px solid var(--line);
+  display: grid; place-items: center; min-height: 232px; padding: 40px;
+  --mono-face: var(--surface-2);
 }
 .clear-in { position: relative; padding: 26px; }
 .clear-in::before {
   content: ""; position: absolute; inset: 0;
-  border: 1.5px dashed var(--primary); border-radius: 8px; opacity: .6;
+  border: 1px dashed var(--primary); border-radius: 6px; opacity: .75;
 }
 .clear-in::after {
-  content: "X"; position: absolute; left: 50%; top: 4px; transform: translateX(-50%);
+  content: "X"; position: absolute; left: 50%; top: 5px; transform: translateX(-50%);
   font-family: var(--mono); font-size: 10px; color: var(--primary);
 }
 [data-guide="hide"] .clear-in::before, [data-guide="hide"] .clear-in::after { display: none; }
-.sizes { display: flex; align-items: flex-end; gap: 40px; flex-wrap: wrap; justify-content: center; }
+.sizes { display: flex; align-items: flex-end; gap: 44px; flex-wrap: wrap; justify-content: center; }
 .size-item { display: grid; gap: 12px; justify-items: center; }
-.size-item .s-lbl { font-family: var(--mono); font-size: 10.5px; color: var(--ink-4); }
+.size-item .s-lbl { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; color: var(--ink-4); }
 
-/* ── Misuse (카드 밖 ✕ 캡션 — 원티드 문법) ──────────── */
-.miss-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px 20px; margin-top: 24px; }
+/* ── 금지 사례 — 캡션을 타일 밖이 아니라 타일 안 푸터에 ─ */
+.miss-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 20px; }
+.miss {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 14px;
+  overflow: hidden; display: flex; flex-direction: column;
+}
 .miss-box {
-  background: var(--card); border-radius: 20px; box-shadow: var(--shadow);
-  display: grid; place-items: center; height: 170px; overflow: hidden;
-  color: var(--ink); --mono-face: var(--card);
+  display: grid; place-items: center; height: 152px; overflow: hidden;
+  color: var(--ink); --mono-face: var(--surface); background: var(--surface);
 }
 .miss-cap {
-  margin-top: 12px; display: flex; align-items: center; gap: 8px;
-  font-size: 13.5px; font-weight: 600; color: var(--ink-2);
+  margin-top: auto; border-top: 1px solid var(--line);
+  padding: 11px 14px; display: flex; align-items: center; gap: 8px;
+  font-size: 12.5px; font-weight: 600; color: var(--ink-2); line-height: 1.45;
 }
-.x-badge {
-  width: 18px; height: 18px; border-radius: 50%; flex: none;
-  background: var(--ink-3); position: relative;
+.miss-cap .x {
+  font-family: var(--mono); font-size: 12px; font-weight: 700;
+  color: var(--negative); flex: none;
 }
-.x-badge::before, .x-badge::after {
-  content: ""; position: absolute; left: 4.5px; top: 8.2px; width: 9px; height: 1.8px;
-  background: var(--card); border-radius: 1px;
-}
-.x-badge::before { transform: rotate(45deg); }
-.x-badge::after { transform: rotate(-45deg); }
 .miss-box .lock { display: flex; align-items: center; gap: 13px; }
 .m-stretch .lock { transform: scaleX(1.45) scale(.9); }
 .m-rot .lock { transform: rotate(-12deg); }
-.m-shadow .u-mk { filter: drop-shadow(2px 4px 5px rgba(0,0,0,.5)); }
+.m-shadow .u-mk { filter: drop-shadow(2px 4px 5px rgba(0,0,0,.55)); }
 .m-recolor { --mk-fill: #FF5AC8; }
 .m-lowcon { background: #9B75FF; --mono-face: #9B75FF; color: #7D55FF; }
 .m-swap .lock { flex-direction: row-reverse; }
 
-/* ── Color cards (색 자체가 카드 — 원티드 문법) ─────── */
-.color-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin-top: 24px; }
-.color-card {
-  border-radius: 20px; padding: 22px; min-height: 210px;
-  display: flex; flex-direction: column; box-shadow: var(--shadow);
+/* ── 컬러 — 조명 젤(gel) 스트립 ──────────────────────
+   낱장 스와치 카드 그리드 대신, 붙어 있는 가로 밴드로 스펙트럼을 보여준다.
+   밴드 전체가 복사 버튼이다. */
+.gels {
+  margin-top: 20px; border-radius: 16px; overflow: hidden;
+  border: 1px solid var(--line); display: flex; flex-direction: column;
 }
-.color-card.span2 { grid-column: span 2; }
-.color-card .c-name { font-size: 16px; font-weight: 700; }
-.color-card .c-vals { margin-top: auto; font-family: var(--mono); font-size: 11px; line-height: 1.75; opacity: .92; }
-.color-card .c-hex { font-size: 13px; font-weight: 700; }
-.copy-btn {
-  margin-top: 12px; align-self: flex-start;
-  border: 0; border-radius: 9px; padding: 7px 13px;
-  font-size: 12px; font-weight: 700; cursor: pointer;
-  background: rgba(255,255,255,.92); color: #1A1A1A;
-  transition: transform .12s;
+.gel {
+  position: relative; border: 0; width: 100%; text-align: left; cursor: pointer;
+  display: flex; align-items: center; gap: 20px;
+  padding: 0 clamp(18px, 2.4vw, 26px); height: 76px;
+  font-family: var(--sans); transition: box-shadow .15s;
 }
-.copy-btn:hover { transform: translateY(-1px); }
-.on-light .copy-btn { background: rgba(26,26,26,.86); color: #FFFFFF; }
+.gel + .gel { border-top: 1px solid rgba(255,255,255,.12); }
+.gel-grad { height: 116px; }
+/* 그라데이션 밴드는 파랑 끝에서 흰 글씨 대비가 3.7:1까지 내려간다.
+   스와치 색은 손대지 않고 글자만 어두운 판 위에 올린다. */
+.gel-grad .g-name, .gel-grad .g-meta {
+  background: rgba(10,12,24,.58); padding: 5px 11px; border-radius: 7px;
+}
+.gel-grad .g-meta { flex: none; }
+.gel-grad .g-act { margin-left: auto; }
+.gel .g-name { font-size: 15px; font-weight: 700; letter-spacing: -.015em; flex: none; min-width: 128px; }
+.gel .g-meta {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .04em;
+  flex: 1; min-width: 0;
+}
+.gel .g-act {
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: .13em;
+  flex: none; padding: 6px 12px; border-radius: 999px;
+  border: 1px solid currentColor; opacity: .55; transition: opacity .15s;
+}
+.gel:hover .g-act { opacity: 1; }
+.gel:hover { box-shadow: inset 0 0 0 2px rgba(255,255,255,.5); }
+.gel.on-light + .gel, .gel + .gel.on-light { border-top-color: rgba(20,19,24,.12); }
+.gel.on-light:hover { box-shadow: inset 0 0 0 2px rgba(20,19,24,.35); }
+/* 밴드는 .gels의 overflow:hidden에 잘리므로 포커스 링을 안쪽에 그린다.
+   :hover 규칙보다 뒤에 두어야 둘이 겹칠 때도 링이 남는다. */
+.gel:focus-visible, .gel:focus-visible:hover {
+  outline: 2px solid #FFFFFF; outline-offset: -4px;
+  box-shadow: inset 0 0 0 7px rgba(10,10,14,.92);
+}
 .c-white { color: #FFFFFF; }
-.c-dark { color: #1A1A1A; }
+.c-dark { color: #14191E; }
 
-/* ── Ramp / tables (흰 카드 안) ─────────────────────── */
-.mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
-
-/* ── Typography ─────────────────────────────────────── */
-.type-hero {
-  border-radius: 18px; background: var(--panel);
-  display: grid; place-items: center; padding: clamp(40px, 7vw, 80px) 24px;
-  text-align: center;
+/* ── 타이포 ─────────────────────────────────────────── */
+.type-stage {
+  position: relative; display: grid; place-items: center;
+  padding: clamp(44px, 7vw, 84px) 24px; text-align: center;
+  background: var(--surface-2);
 }
-.type-hero .big {
-  font-size: clamp(40px, 7.5vw, 84px); letter-spacing: -.035em; line-height: 1.1;
+.type-stage .big {
+  font-size: clamp(38px, 7vw, 78px); letter-spacing: -.038em; line-height: 1.08;
   font-weight: var(--type-w, 700);
 }
-.type-hero .tri { margin-top: 18px; color: var(--ink-3); font-size: clamp(14px, 1.8vw, 18px); font-weight: var(--type-w, 700); }
+.type-stage .tri {
+  margin-top: 16px; color: var(--ink-3); font-size: clamp(13px, 1.7vw, 17px);
+  font-weight: var(--type-w, 700);
+}
 
-/* ── Communication ──────────────────────────────────── */
-.rule-card ol { margin: 14px 0 0; padding-left: 20px; display: grid; gap: 12px; }
-.rule-card li { font-size: 13.5px; color: var(--ink-2); }
-.rule-card li b { display: block; color: var(--ink); font-weight: 700; margin-top: 3px; }
-.dd { display: grid; gap: 9px; margin-top: 14px; }
-.dd-item { display: grid; grid-template-columns: 30px 1fr; gap: 8px; align-items: start; font-size: 13.5px; }
-.dd-item .k { font-family: var(--mono); font-size: 10.5px; font-weight: 700; padding-top: 3px; }
+/* ── 커뮤니케이션 ───────────────────────────────────── */
+.rule-list { margin: 14px 0 0; padding: 0; list-style: none; display: grid; gap: 14px; }
+.rule-list li { font-size: 13.5px; color: var(--ink-2); display: grid; grid-template-columns: 22px 1fr; gap: 10px; }
+.rule-list .n { font-family: var(--mono); font-size: 10.5px; color: var(--ink-4); padding-top: 4px; letter-spacing: .06em; }
+.rule-list b { display: block; color: var(--ink); font-weight: 700; margin-top: 4px; }
+.dd { display: grid; gap: 10px; margin-top: 16px; }
+.dd-item {
+  display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: start;
+  font-size: 13.5px; border-left: 2px solid var(--line); padding-left: 12px;
+}
+.dd-item .k { font-family: var(--mono); font-size: 10px; font-weight: 700; letter-spacing: .1em; padding-top: 3px; }
+.dd-item.do { border-left-color: var(--positive); }
 .dd-item.do .k { color: var(--positive); }
-.dd-item.no .k { color: var(--negative); }
-.dd-item.no span { color: var(--ink-4); text-decoration: line-through; text-decoration-color: var(--line); }
-.voice-why { margin-top: 8px; font-size: 12px; color: var(--ink-4); }
+.dd-item.no { border-left-color: var(--line); }
+.dd-item.no .k { color: var(--ink-4); }
+.dd-item.no span { color: var(--ink-4); }
+.voice-why { margin-top: 6px; font-size: 12.5px; color: var(--ink-4); }
 
 /* ── Toast ──────────────────────────────────────────────
-   아티팩트 iframe은 콘텐츠 높이만큼 늘어나고 바깥 페이지가 스크롤하므로
-   iframe 안 position:fixed는 화면이 아니라 문서 맨 아래에 붙어 안 보인다.
-   항상 보이는 sticky 내비(.nav)의 자식으로 두고 그 바로 아래에 매단다. */
+   iframe 안에서는 position:fixed가 화면이 아니라 문서 맨 아래에 붙는다.
+   항상 보이는 sticky 내비의 자식으로 두고 그 바로 아래에 매단다. */
 .toast {
-  position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%) translateY(-8px);
-  z-index: 40; width: max-content; max-width: min(560px, calc(100vw - 32px));
-  background: var(--ink); color: var(--ground);
+  position: absolute; top: calc(100% + 10px); left: 50%;
+  transform: translateX(-50%) translateY(-8px);
+  z-index: 60; width: max-content; max-width: min(560px, calc(100vw - 32px));
+  background: var(--surface-2); color: var(--ink);
+  border: 1px solid var(--line-strong);
   padding: 13px 18px; border-radius: 12px; font-size: 13px; line-height: 1.55;
-  box-shadow: 0 8px 30px rgba(0,0,0,.28);
+  box-shadow: 0 18px 50px rgba(0,0,0,.45);
   opacity: 0; pointer-events: none; transition: opacity .2s, transform .2s;
 }
 .toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
@@ -360,23 +496,33 @@ button { font-family: inherit; }
 
 /* ── Foot ───────────────────────────────────────────── */
 .foot {
-  margin-top: clamp(64px, 10vw, 120px); padding: 30px 0 56px;
+  margin-top: clamp(72px, 10vw, 120px); padding: 28px 0 64px;
   border-top: 1px solid var(--line);
-  color: var(--ink-4); font-size: 12px;
+  color: var(--ink-4); font-size: 11.5px; font-family: var(--mono); letter-spacing: .04em;
   display: flex; justify-content: space-between; gap: 16px; flex-wrap: wrap;
 }
 
 /* ── Responsive ─────────────────────────────────────── */
-@media (max-width: 900px) {
-  .g3, .color-grid { grid-template-columns: repeat(2, 1fr); }
-  .spec-split { grid-template-columns: 1fr; }
-  .spec-side { min-height: 0; }
-  .spec-side .opts { padding-top: 16px; }
+@media (max-width: 1000px) {
+  .g3, .miss-grid { grid-template-columns: repeat(2, 1fr); }
 }
-@media (max-width: 620px) {
+@media (max-width: 720px) {
   .g2, .g3, .miss-grid { grid-template-columns: 1fr; }
-  .color-grid { grid-template-columns: 1fr; }
-  .color-card.span2 { grid-column: span 1; }
+  .nav-mark .ver { display: none; }
+  .wrap { padding: 0 20px; }
+  .rail { padding: 8px 20px; }
+  .toolbar { align-items: flex-start; }
+  .tb-ctrl { margin-left: 0; gap: 16px; }
+  .gel { height: auto; padding-top: 16px; padding-bottom: 16px; flex-wrap: wrap; gap: 10px; }
+  .gel-grad { height: auto; }
+  .gel .g-name { min-width: 0; }
+  .gel .g-meta { flex-basis: 100%; }
+  .hero h1 { max-width: 22ch; }
+  .hero-lock .u-mk { width: 42px; height: 42px; }
+  .hero-lock .u-wm { height: 31px; }
+}
+/* 좁은 화면에서는 상단 바를 심볼 + 액션만 남긴다 */
+@media (max-width: 520px) {
   .nav-mark b { display: none; }
 }
 @media (prefers-reduced-motion: reduce) {
@@ -384,9 +530,15 @@ button { font-family: inherit; }
 }
 </style>
 
-<!-- ── SVG 정의: 정본 시그니처(라운드 스퀘어 심볼 + Rillive 워드마크) ──
-     워드마크는 <symbol>이 아니라 <g> — symbol의 자체 viewBox가 바깥 svg와
-     이중 매핑되어 잘리는 함정이 있다. -->
+<script>
+/* 저장된 테마를 첫 페인트 전에 복원 — 라이트 사용자가 다크 플래시를 보지 않도록 */
+(function () {
+  try {
+    var t = localStorage.getItem('rillive-bc-theme');
+    if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+  } catch (e) {}
+})();
+</script>
 <svg width="0" height="0" aria-hidden="true" style="position:absolute">
   <defs>
     <linearGradient id="rl-grad" x1="0" y1="7.63" x2="53.04" y2="23.13" gradientUnits="userSpaceOnUse">
@@ -413,186 +565,227 @@ button { font-family: inherit; }
   </g>
 </svg>
 
-<!-- ── Nav ── -->
+<!-- ── Top bar ── -->
 <nav class="nav">
   <div class="nav-host">
-  <div class="nav-in">
-    <a class="nav-mark" href="#top">
-      <svg viewBox="0 0 48 48" aria-hidden="true"><use href="#mk"/></svg>
-      <b>릴라이브 브랜드센터</b>
-    </a>
-    <div class="nav-links" id="navlinks">
-      <a href="#ch-logo">브랜드 로고</a>
-      <a href="#ch-rules">로고 사용 규정</a>
-      <a href="#ch-assets">브랜드 에셋</a>
-      <a href="#ch-comm">커뮤니케이션</a>
+    <div class="nav-in">
+      <a class="nav-mark" href="#top">
+        <svg viewBox="0 0 48 48" aria-hidden="true"><use href="#mk"/></svg>
+        <b>릴라이브 브랜드센터</b>
+        <span class="ver">v3.1</span>
+      </a>
+      <button class="btn" type="button" data-dl-all>
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8.5M4.6 7.4 8 10.8l3.4-3.4M3 13.4h10"/></svg>
+        로고 패키지 다운로드
+      </button>
+      <button class="icon-btn" id="tog" type="button" aria-label="라이트 모드로 전환">
+        <svg class="ic-dark" viewBox="0 0 16 16" aria-hidden="true">
+          <path d="M13.4 9.5A5.7 5.7 0 0 1 6.5 2.6a5.7 5.7 0 1 0 6.9 6.9z" fill="currentColor"/>
+        </svg>
+        <svg class="ic-light" viewBox="0 0 16 16" aria-hidden="true">
+          <circle cx="8" cy="8" r="3.1" fill="currentColor"/>
+          <g stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
+            <path d="M8 1.5v1.7M8 12.8v1.7M1.5 8h1.7M12.8 8h1.7M3.4 3.4l1.2 1.2M11.4 11.4l1.2 1.2M12.6 3.4l-1.2 1.2M4.6 11.4l-1.2 1.2"/>
+          </g>
+        </svg>
+      </button>
     </div>
-    <button class="tog" id="dl-all" type="button">전체 다운로드</button>
-    <button class="tog tog-ic" id="tog" type="button" aria-label="라이트/다크 전환">◐</button>
-  </div>
-  <div id="toast-host"></div>
+    <div id="toast-host"></div>
   </div>
 </nav>
 
-<div class="wrap" id="top">
+<!-- ── Chapter rail (큐시트) ── -->
+<nav class="rail" id="rail" aria-label="챕터">
+  <a href="#ch-logo"><i>01</i><span>브랜드 로고</span></a>
+  <a href="#ch-rules"><i>02</i><span>로고 사용 규정</span></a>
+  <a href="#ch-assets"><i>03</i><span>브랜드 에셋</span></a>
+  <a href="#ch-comm"><i>04</i><span>커뮤니케이션</span></a>
+</nav>
+
+<main id="top">
 
 <!-- ── Hero ── -->
 <header class="hero">
-  <h1>릴라이브 브랜드센터는<br>
-  브랜드 자산이 일관성 있게 사용될 수 있도록<br>
-  가이드라인과 리소스를 제공합니다.</h1>
+  <div class="wrap">
+    <span class="hero-lock">
+      <svg class="u-mk" viewBox="0 0 48 48" aria-hidden="true"><use href="#mk"/></svg>
+      <svg class="u-wm" viewBox="66 5.6 141.7 35.93" role="img" aria-label="Rillive"><use href="#wm"/></svg>
+    </span>
+    <p class="kicker eyebrow">Brand Center</p>
+    <h1>릴라이브 브랜드센터는 <br>브랜드 자산이 일관성 있게 사용될 수 있도록 <br>가이드라인과 리소스를 제공합니다.</h1>
+    <div class="hero-meta">
+      <button class="btn-grad" type="button" data-dl-all>
+        <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8.5M4.6 7.4 8 10.8l3.4-3.4M3 13.4h10"/></svg>
+        로고 패키지 다운로드
+      </button>
+      <span class="note">SVG + PNG · ZIP</span>
+    </div>
+  </div>
+  <hr class="stage-line">
 </header>
 
-<!-- ════════════ 1. 브랜드 로고 ════════════ -->
+<div class="wrap">
+
+<!-- ════════════ 01 브랜드 로고 ════════════ -->
 <div class="chapter" id="ch-logo">
-  <h2 class="chapter-title">브랜드 로고</h2>
+  <div class="ch-head">
+    <span class="ch-num">01</span>
+    <h2 class="ch-title">브랜드 로고</h2>
+    <span class="ch-rule"></span>
+  </div>
 
   <div class="section">
     <div class="sec-head">
       <h3 id="s-signature">시그니처 로고</h3>
-      <a class="anchor-ic" href="#s-signature" aria-label="시그니처 로고 섹션 링크">🔗</a>
+      <a class="anchor" href="#s-signature" aria-label="시그니처 로고 섹션 링크">#</a>
     </div>
     <p class="sec-desc">브랜드를 상징하는 시그니처 로고, 심볼 로고, 조합형입니다. 지정된 가이드를 준수하여 사용해 주세요.</p>
 
-    <div class="card">
-      <div class="spec-split">
-        <div class="spec-side">
-          <div>
-            <p class="card-title">시그니처 로고</p>
-            <p class="card-desc">라운드 스퀘어 심볼과 로고타입이 결합된 가장 기본이 되는 로고입니다. 심볼의 얼굴은 친근함을, 블루→퍼플 그라데이션은 무대 조명을 뜻합니다.</p>
-          </div>
-          <div class="opts">
-            <div class="opt-row">
-              <span class="lbl">배경 컬러</span>
-              <div class="seg" data-target="sig-panel" data-attr="bg">
-                <button type="button" data-value="light" aria-pressed="true">Light</button>
-                <button type="button" data-value="dark" aria-pressed="false">Dark</button>
-              </div>
-            </div>
-            <div class="opt-row">
-              <span class="lbl">로고 컬러</span>
-              <div class="seg" data-target="sig-panel" data-attr="logo">
-                <button type="button" data-value="color" aria-pressed="true">Color</button>
-                <button type="button" data-value="mono" aria-pressed="false">Mono</button>
-              </div>
-            </div>
-            <button class="btn" type="button" data-dl="horizontal" data-panel="sig-panel" style="margin-top:18px">⬇ 다운로드</button>
-          </div>
+    <div class="panel">
+      <div class="stage" id="sig-panel" data-bg="light" data-logo="color">
+        <span class="state" aria-hidden="true"></span>
+        <span class="lock">
+          <svg class="u-mk u-color" viewBox="0 0 48 48" aria-hidden="true"><use href="#mk"/></svg>
+          <svg class="u-mk u-mono" viewBox="0 0 48 48" aria-hidden="true"><use href="#mk-mono"/></svg>
+          <svg class="u-wm" viewBox="66 5.6 141.7 35.93" style="width:130px" role="img" aria-label="Rillive"><use href="#wm"/></svg>
+        </span>
+      </div>
+      <div class="toolbar">
+        <div class="tb-text">
+          <p class="panel-title">시그니처 로고</p>
+          <p class="panel-desc">라운드 스퀘어 심볼과 로고타입이 결합된 가장 기본이 되는 로고입니다. 심볼의 얼굴은 친근함을, 블루→퍼플 그라데이션은 무대 조명을 뜻합니다.</p>
         </div>
-        <div class="spec-panel" id="sig-panel" data-bg="light" data-logo="color">
-          <span class="lock">
-            <svg class="u-mk u-color" viewBox="0 0 48 48" aria-hidden="true"><use href="#mk"/></svg>
-            <svg class="u-mk u-mono" viewBox="0 0 48 48" aria-hidden="true"><use href="#mk-mono"/></svg>
-            <svg class="u-wm" viewBox="66 5.6 141.7 35.93" style="width:141px" role="img" aria-label="Rillive"><use href="#wm"/></svg>
-          </span>
+        <div class="tb-ctrl">
+          <div class="switch">
+            <span class="lbl">BG</span>
+            <div class="seg" data-target="sig-panel" data-attr="bg">
+              <button type="button" data-value="light" aria-pressed="true">Light</button>
+              <button type="button" data-value="dark" aria-pressed="false">Dark</button>
+            </div>
+          </div>
+          <div class="switch">
+            <span class="lbl">Logo</span>
+            <div class="seg" data-target="sig-panel" data-attr="logo">
+              <button type="button" data-value="color" aria-pressed="true">Color</button>
+              <button type="button" data-value="mono" aria-pressed="false">Mono</button>
+            </div>
+          </div>
+          <button class="btn" type="button" data-dl="horizontal" data-panel="sig-panel">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8.5M4.6 7.4 8 10.8l3.4-3.4M3 13.4h10"/></svg>
+            SVG
+          </button>
         </div>
       </div>
     </div>
 
-    <div class="card">
-      <div class="spec-split">
-        <div class="spec-side">
-          <div>
-            <p class="card-title">심볼 로고</p>
-            <p class="card-desc">앱 아이콘·파비콘·프로필처럼 브랜드가 이미 인지된 맥락에서 단독으로 사용합니다. 라운드 스퀘어 판형을 그대로 유지합니다.</p>
-          </div>
-          <div class="opts">
-            <div class="opt-row">
-              <span class="lbl">배경 컬러</span>
-              <div class="seg" data-target="sym-panel" data-attr="bg">
-                <button type="button" data-value="light" aria-pressed="true">Light</button>
-                <button type="button" data-value="dark" aria-pressed="false">Dark</button>
-              </div>
-            </div>
-            <div class="opt-row">
-              <span class="lbl">로고 컬러</span>
-              <div class="seg" data-target="sym-panel" data-attr="logo">
-                <button type="button" data-value="color" aria-pressed="true">Color</button>
-                <button type="button" data-value="mono" aria-pressed="false">Mono</button>
-              </div>
-            </div>
-            <button class="btn" type="button" data-dl="symbol" data-panel="sym-panel" style="margin-top:18px">⬇ 다운로드</button>
-          </div>
+    <div class="panel">
+      <div class="stage" id="sym-panel" data-bg="light" data-logo="color">
+        <span class="state" aria-hidden="true"></span>
+        <span class="lock">
+          <svg class="u-color" style="width:88px;height:88px" viewBox="0 0 48 48" aria-hidden="true"><use href="#mk"/></svg>
+          <svg class="u-mono" style="width:88px;height:88px" viewBox="0 0 48 48" aria-hidden="true"><use href="#mk-mono"/></svg>
+        </span>
+      </div>
+      <div class="toolbar">
+        <div class="tb-text">
+          <p class="panel-title">심볼 로고</p>
+          <p class="panel-desc">앱 아이콘·파비콘·프로필처럼 브랜드가 이미 인지된 맥락에서 단독으로 사용합니다. 라운드 스퀘어 판형을 그대로 유지합니다.</p>
         </div>
-        <div class="spec-panel" id="sym-panel" data-bg="light" data-logo="color">
-          <span class="lock">
-            <svg class="u-color" style="width:96px;height:96px" viewBox="0 0 48 48" aria-hidden="true"><use href="#mk"/></svg>
-            <svg class="u-mono" style="width:96px;height:96px" viewBox="0 0 48 48" aria-hidden="true"><use href="#mk-mono"/></svg>
-          </span>
+        <div class="tb-ctrl">
+          <div class="switch">
+            <span class="lbl">BG</span>
+            <div class="seg" data-target="sym-panel" data-attr="bg">
+              <button type="button" data-value="light" aria-pressed="true">Light</button>
+              <button type="button" data-value="dark" aria-pressed="false">Dark</button>
+            </div>
+          </div>
+          <div class="switch">
+            <span class="lbl">Logo</span>
+            <div class="seg" data-target="sym-panel" data-attr="logo">
+              <button type="button" data-value="color" aria-pressed="true">Color</button>
+              <button type="button" data-value="mono" aria-pressed="false">Mono</button>
+            </div>
+          </div>
+          <button class="btn" type="button" data-dl="symbol" data-panel="sym-panel">
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8.5M4.6 7.4 8 10.8l3.4-3.4M3 13.4h10"/></svg>
+            SVG
+          </button>
         </div>
       </div>
     </div>
 
-    <div class="card">
-      <p class="card-title">조합</p>
-      <p class="card-desc">쓰임새에 따라 가로형·세로형·심볼 단독형을 사용합니다. 심볼과 워드마크의 비율·간격은 변경하지 않습니다.</p>
+    <div class="panel panel-pad">
+      <p class="panel-title">조합</p>
+      <p class="panel-desc">쓰임새에 따라 가로형·세로형·심볼 단독형을 사용합니다. 심볼과 워드마크의 비율·간격은 변경하지 않습니다.</p>
       <div class="grid g3">
         <div class="mini-spec">
           <span class="cap">Horizontal</span>
           <span class="lock">
-            <svg style="width:38px;height:38px" viewBox="0 0 48 48" aria-hidden="true"><use href="#mk"/></svg>
-            <svg class="wm-fixed" viewBox="66 5.6 141.7 35.93" style="width:84px;height:auto" aria-hidden="true"><use href="#wm"/></svg>
+            <svg style="width:36px;height:36px" viewBox="0 0 48 48" aria-hidden="true"><use href="#mk"/></svg>
+            <svg class="wm-fixed" viewBox="66 5.6 141.7 35.93" style="width:80px;height:auto" aria-hidden="true"><use href="#wm"/></svg>
           </span>
         </div>
         <div class="mini-spec">
           <span class="cap">Vertical</span>
           <span class="lock v">
-            <svg style="width:34px;height:34px" viewBox="0 0 48 48" aria-hidden="true"><use href="#mk"/></svg>
-            <svg class="wm-fixed" viewBox="66 5.6 141.7 35.93" style="width:100px;height:auto" aria-hidden="true"><use href="#wm"/></svg>
+            <svg style="width:32px;height:32px" viewBox="0 0 48 48" aria-hidden="true"><use href="#mk"/></svg>
+            <svg class="wm-fixed" viewBox="66 5.6 141.7 35.93" style="width:94px;height:auto" aria-hidden="true"><use href="#wm"/></svg>
           </span>
         </div>
         <div class="mini-spec">
           <span class="cap">Symbol only</span>
-          <svg style="width:44px;height:44px" viewBox="0 0 48 48" aria-hidden="true"><use href="#mk"/></svg>
+          <svg style="width:42px;height:42px" viewBox="0 0 48 48" aria-hidden="true"><use href="#mk"/></svg>
         </div>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ════════════ 2. 로고 사용 규정 ════════════ -->
+<!-- ════════════ 02 로고 사용 규정 ════════════ -->
 <div class="chapter" id="ch-rules">
-  <h2 class="chapter-title">로고 사용 규정</h2>
+  <div class="ch-head">
+    <span class="ch-num">02</span>
+    <h2 class="ch-title">로고 사용 규정</h2>
+    <span class="ch-rule"></span>
+  </div>
 
   <div class="section">
     <div class="sec-head">
       <h3 id="s-space">여백 &amp; 최소 크기</h3>
-      <a class="anchor-ic" href="#s-space" aria-label="여백 섹션 링크">🔗</a>
+      <a class="anchor" href="#s-space" aria-label="여백 섹션 링크">#</a>
     </div>
     <p class="sec-desc">로고 주변에는 보호 여백을 확보하고, 최소 크기 이하로 줄이지 않습니다.</p>
 
-    <div class="card">
-      <div class="spec-split">
-        <div class="spec-side">
-          <div>
-            <p class="card-title">보호 여백</p>
-            <p class="card-desc">사방 최소 <b class="mono">X</b> 이상의 여백을 둡니다. <b class="mono">X = 심볼 높이의 1/2</b>. 이 영역 안에는 어떤 요소도 배치하지 않습니다.</p>
-          </div>
-          <div class="opts">
-            <div class="opt-row">
-              <span class="lbl">가이드</span>
-              <div class="seg" data-target="clear-panel" data-attr="guide">
-                <button type="button" data-value="view" aria-pressed="true">View</button>
-                <button type="button" data-value="hide" aria-pressed="false">Hide</button>
-              </div>
+    <div class="panel">
+      <div class="measure" id="clear-panel" data-guide="view">
+        <span class="clear-in">
+          <span class="lock" style="display:flex;align-items:center;gap:14px">
+            <svg style="width:40px;height:40px" viewBox="0 0 48 48" aria-hidden="true"><use href="#mk"/></svg>
+            <svg viewBox="66 5.6 141.7 35.93" style="width:88px;height:auto;fill:var(--ink)" aria-hidden="true"><use href="#wm"/></svg>
+          </span>
+        </span>
+      </div>
+      <div class="toolbar">
+        <div class="tb-text">
+          <p class="panel-title">보호 여백</p>
+          <p class="panel-desc">사방 최소 <b class="mono">X</b> 이상의 여백을 둡니다. <b class="mono">X = 심볼 높이의 1/2</b>. 이 영역 안에는 어떤 요소도 배치하지 않습니다.</p>
+        </div>
+        <div class="tb-ctrl">
+          <div class="switch">
+            <span class="lbl">Guide</span>
+            <div class="seg" data-target="clear-panel" data-attr="guide">
+              <button type="button" data-value="view" aria-pressed="true">View</button>
+              <button type="button" data-value="hide" aria-pressed="false">Hide</button>
             </div>
           </div>
-        </div>
-        <div class="clear-panel" id="clear-panel" data-guide="view">
-          <span class="clear-in">
-            <span class="lock" style="display:flex;align-items:center;gap:14px">
-              <svg style="width:40px;height:40px" viewBox="0 0 48 48" aria-hidden="true"><use href="#mk"/></svg>
-              <svg viewBox="66 5.6 141.7 35.93" style="width:88px;height:auto;fill:var(--ink)" aria-hidden="true"><use href="#wm"/></svg>
-            </span>
-          </span>
         </div>
       </div>
     </div>
 
-    <div class="card">
-      <p class="card-title">최소 크기</p>
-      <p class="card-desc">디지털 기준 락업 96px, 심볼 단독 24px입니다. 그 이하에서는 얼굴이 뭉개지므로 심볼 단독형을 사용합니다.</p>
-      <div class="clear-panel" style="margin-top:24px">
+    <div class="panel panel-pad">
+      <p class="panel-title">최소 크기</p>
+      <p class="panel-desc">디지털 기준 락업 96px, 심볼 단독 24px입니다. 그 이하에서는 얼굴이 뭉개지므로 심볼 단독형을 사용합니다.</p>
+      <div class="measure" style="margin-top:20px">
         <div class="sizes">
           <span class="size-item">
             <span style="display:flex;align-items:center;gap:8px">
@@ -613,178 +806,169 @@ button { font-family: inherit; }
   <div class="section">
     <div class="sec-head">
       <h3 id="s-misuse">로고 사용 시 유의사항</h3>
-      <a class="anchor-ic" href="#s-misuse" aria-label="유의사항 섹션 링크">🔗</a>
+      <a class="anchor" href="#s-misuse" aria-label="유의사항 섹션 링크">#</a>
     </div>
     <p class="sec-desc">브랜드를 대표하는 핵심 요소이므로 왜곡 및 변형에 유의하고 규정에 따라 사용해 주세요.</p>
 
     <div class="miss-grid">
-      <div>
+      <div class="miss">
         <div class="miss-box m-stretch">
-          <span class="lock"><svg class="u-mk" style="width:40px;height:40px" viewBox="0 0 48 48" aria-hidden="true"><use href="#mk"/></svg><svg viewBox="66 5.6 141.7 35.93" style="width:88px;height:auto;fill:var(--ink)" aria-hidden="true"><use href="#wm"/></svg></span>
+          <span class="lock"><svg class="u-mk" style="width:38px;height:38px" viewBox="0 0 48 48" aria-hidden="true"><use href="#mk"/></svg><svg viewBox="66 5.6 141.7 35.93" style="width:84px;height:auto;fill:var(--ink)" aria-hidden="true"><use href="#wm"/></svg></span>
         </div>
-        <p class="miss-cap"><span class="x-badge" aria-hidden="true"></span>가로세로 비율을 바꾸지 마세요</p>
+        <p class="miss-cap"><span class="x" aria-hidden="true">✕</span>가로세로 비율을 바꾸지 마세요</p>
       </div>
-      <div>
+      <div class="miss">
         <div class="miss-box m-rot">
-          <span class="lock"><svg class="u-mk" style="width:40px;height:40px" viewBox="0 0 48 48" aria-hidden="true"><use href="#mk"/></svg><svg viewBox="66 5.6 141.7 35.93" style="width:88px;height:auto;fill:var(--ink)" aria-hidden="true"><use href="#wm"/></svg></span>
+          <span class="lock"><svg class="u-mk" style="width:38px;height:38px" viewBox="0 0 48 48" aria-hidden="true"><use href="#mk"/></svg><svg viewBox="66 5.6 141.7 35.93" style="width:84px;height:auto;fill:var(--ink)" aria-hidden="true"><use href="#wm"/></svg></span>
         </div>
-        <p class="miss-cap"><span class="x-badge" aria-hidden="true"></span>회전하거나 기울이지 마세요</p>
+        <p class="miss-cap"><span class="x" aria-hidden="true">✕</span>회전하거나 기울이지 마세요</p>
       </div>
-      <div>
+      <div class="miss">
         <div class="miss-box m-recolor">
-          <span class="lock"><svg class="u-mk" style="width:40px;height:40px" viewBox="0 0 48 48" aria-hidden="true"><use href="#mk"/></svg><svg viewBox="66 5.6 141.7 35.93" style="width:88px;height:auto;fill:var(--ink)" aria-hidden="true"><use href="#wm"/></svg></span>
+          <span class="lock"><svg class="u-mk" style="width:38px;height:38px" viewBox="0 0 48 48" aria-hidden="true"><use href="#mk"/></svg><svg viewBox="66 5.6 141.7 35.93" style="width:84px;height:auto;fill:var(--ink)" aria-hidden="true"><use href="#wm"/></svg></span>
         </div>
-        <p class="miss-cap"><span class="x-badge" aria-hidden="true"></span>지정 팔레트 밖의 색으로 바꾸지 마세요</p>
+        <p class="miss-cap"><span class="x" aria-hidden="true">✕</span>지정 팔레트 밖의 색으로 바꾸지 마세요</p>
       </div>
-      <div>
+      <div class="miss">
         <div class="miss-box m-shadow">
-          <span class="lock"><svg class="u-mk" style="width:40px;height:40px" viewBox="0 0 48 48" aria-hidden="true"><use href="#mk"/></svg><svg viewBox="66 5.6 141.7 35.93" style="width:88px;height:auto;fill:var(--ink)" aria-hidden="true"><use href="#wm"/></svg></span>
+          <span class="lock"><svg class="u-mk" style="width:38px;height:38px" viewBox="0 0 48 48" aria-hidden="true"><use href="#mk"/></svg><svg viewBox="66 5.6 141.7 35.93" style="width:84px;height:auto;fill:var(--ink)" aria-hidden="true"><use href="#wm"/></svg></span>
         </div>
-        <p class="miss-cap"><span class="x-badge" aria-hidden="true"></span>그림자·광택 등 효과를 더하지 마세요</p>
+        <p class="miss-cap"><span class="x" aria-hidden="true">✕</span>그림자·광택 등 효과를 더하지 마세요</p>
       </div>
-      <div>
+      <div class="miss">
         <div class="miss-box m-lowcon">
-          <span class="lock"><svg class="u-mk" style="width:40px;height:40px" viewBox="0 0 48 48" aria-hidden="true"><use href="#mk-mono"/></svg><svg viewBox="66 5.6 141.7 35.93" style="width:88px;height:auto;fill:currentColor" aria-hidden="true"><use href="#wm"/></svg></span>
+          <span class="lock"><svg class="u-mk" style="width:38px;height:38px" viewBox="0 0 48 48" aria-hidden="true"><use href="#mk-mono"/></svg><svg viewBox="66 5.6 141.7 35.93" style="width:84px;height:auto;fill:currentColor" aria-hidden="true"><use href="#wm"/></svg></span>
         </div>
-        <p class="miss-cap"><span class="x-badge" aria-hidden="true"></span>대비가 부족한 배경에 사용하지 마세요</p>
+        <p class="miss-cap"><span class="x" aria-hidden="true">✕</span>대비가 부족한 배경에 사용하지 마세요</p>
       </div>
-      <div>
+      <div class="miss">
         <div class="miss-box m-swap">
-          <span class="lock"><svg class="u-mk" style="width:40px;height:40px" viewBox="0 0 48 48" aria-hidden="true"><use href="#mk"/></svg><svg viewBox="66 5.6 141.7 35.93" style="width:88px;height:auto;fill:var(--ink)" aria-hidden="true"><use href="#wm"/></svg></span>
+          <span class="lock"><svg class="u-mk" style="width:38px;height:38px" viewBox="0 0 48 48" aria-hidden="true"><use href="#mk"/></svg><svg viewBox="66 5.6 141.7 35.93" style="width:84px;height:auto;fill:var(--ink)" aria-hidden="true"><use href="#wm"/></svg></span>
         </div>
-        <p class="miss-cap"><span class="x-badge" aria-hidden="true"></span>심볼과 워드마크의 순서를 바꾸지 마세요</p>
+        <p class="miss-cap"><span class="x" aria-hidden="true">✕</span>심볼과 워드마크의 순서를 바꾸지 마세요</p>
       </div>
     </div>
   </div>
 </div>
 
-<!-- ════════════ 3. 브랜드 에셋 ════════════ -->
+<!-- ════════════ 03 브랜드 에셋 ════════════ -->
 <div class="chapter" id="ch-assets">
-  <h2 class="chapter-title">브랜드 에셋</h2>
+  <div class="ch-head">
+    <span class="ch-num">03</span>
+    <h2 class="ch-title">브랜드 에셋</h2>
+    <span class="ch-rule"></span>
+  </div>
 
   <!-- 컬러 -->
   <div class="section">
     <div class="sec-head">
       <h3 id="s-color">브랜드 컬러</h3>
-      <a class="anchor-ic" href="#s-color" aria-label="컬러 섹션 링크">🔗</a>
+      <a class="anchor" href="#s-color" aria-label="컬러 섹션 링크">#</a>
     </div>
-    <p class="sec-desc">브랜드 그라데이션은 릴라이브의 서명입니다. 로고·1순위 액션·강조에만 사용하고, 대면적 배경에는 쓰지 않습니다.</p>
+    <p class="sec-desc">브랜드 그라데이션은 릴라이브의 서명입니다. 로고·1순위 액션·강조에만 사용하고, 대면적 배경에는 쓰지 않습니다. 밴드를 누르면 값이 복사됩니다.</p>
 
-    <div class="color-grid">
-      <div class="color-card span2 c-white" style="background:linear-gradient(103deg,#507DFF 0%,#6A5CFF 50%,#7D55FF 100%)">
-        <p class="c-name">Brand Gradient</p>
-        <div class="c-vals">
-          103° LINEAR<br>
-          #507DFF → #6A5CFF → #7D55FF<br>
-          <span class="c-hex">Gradient/Main</span>
-        </div>
-        <button class="copy-btn" type="button" data-copy="linear-gradient(103deg, #507DFF 0%, #6A5CFF 50%, #7D55FF 100%)" data-label="Copy CSS">Copy CSS</button>
-      </div>
-      <div class="color-card c-white" style="background:#7D55FF">
-        <p class="c-name">Purple</p>
-        <div class="c-vals">
-          R125 G85 B255<br>
-          Purple/500 · Primary<br>
-          <span class="c-hex">#7D55FF</span>
-        </div>
-        <button class="copy-btn" type="button" data-copy="#7D55FF" data-label="Copy Hex">Copy Hex</button>
-      </div>
-      <div class="color-card c-white" style="background:#507DFF">
-        <p class="c-name">Blue</p>
-        <div class="c-vals">
-          R80 G125 B255<br>
-          그라데이션 시작점<br>
-          <span class="c-hex">#507DFF</span>
-        </div>
-        <button class="copy-btn" type="button" data-copy="#507DFF" data-label="Copy Hex">Copy Hex</button>
-      </div>
-      <div class="color-card c-white" style="background:#6A5CFF">
-        <p class="c-name">Mid</p>
-        <div class="c-vals">
-          R106 G92 B255<br>
-          그라데이션 중간점<br>
-          <span class="c-hex">#6A5CFF</span>
-        </div>
-        <button class="copy-btn" type="button" data-copy="#6A5CFF" data-label="Copy Hex">Copy Hex</button>
-      </div>
-      <div class="color-card c-white" style="background:#1A1A1A">
-        <p class="c-name">Ink</p>
-        <div class="c-vals">
-          R26 G26 B26<br>
-          Gray/900 · 워드마크<br>
-          <span class="c-hex">#1A1A1A</span>
-        </div>
-        <button class="copy-btn" type="button" data-copy="#1A1A1A" data-label="Copy Hex">Copy Hex</button>
-      </div>
-      <div class="color-card on-light c-dark" style="background:#FAFAFA;border:1px solid var(--line)">
-        <p class="c-name">Ground</p>
-        <div class="c-vals">
-          R250 G250 B250<br>
-          Gray/50 · 화면 바탕<br>
-          <span class="c-hex">#FAFAFA</span>
-        </div>
-        <button class="copy-btn" type="button" data-copy="#FAFAFA" data-label="Copy Hex">Copy Hex</button>
-      </div>
+    <div class="gels">
+      <button class="gel gel-grad c-white" type="button" data-copy="linear-gradient(103deg, #507DFF 0%, #6A5CFF 50%, #7D55FF 100%)" data-label="COPY CSS" style="background:linear-gradient(103deg,#507DFF 0%,#6A5CFF 50%,#7D55FF 100%)">
+        <span class="g-name">Brand Gradient</span>
+        <span class="g-meta">103° LINEAR · #507DFF → #6A5CFF → #7D55FF · Gradient/Main</span>
+        <span class="g-act" data-out>COPY CSS</span>
+      </button>
+      <button class="gel c-white" type="button" data-copy="#7D55FF" data-label="COPY HEX" style="background:#7D55FF">
+        <span class="g-name">Purple</span>
+        <span class="g-meta">#7D55FF · R125 G85 B255 · Purple/500 · Primary</span>
+        <span class="g-act" data-out>COPY HEX</span>
+      </button>
+      <button class="gel c-white" type="button" data-copy="#6A5CFF" data-label="COPY HEX" style="background:#6A5CFF">
+        <span class="g-name">Mid</span>
+        <span class="g-meta">#6A5CFF · R106 G92 B255 · 그라데이션 중간점</span>
+        <span class="g-act" data-out>COPY HEX</span>
+      </button>
+      <button class="gel c-dark" type="button" data-copy="#507DFF" data-label="COPY HEX" style="background:#507DFF">
+        <span class="g-name">Blue</span>
+        <span class="g-meta">#507DFF · R80 G125 B255 · 그라데이션 시작점</span>
+        <span class="g-act" data-out>COPY HEX</span>
+      </button>
+      <button class="gel c-white" type="button" data-copy="#1A1A1A" data-label="COPY HEX" style="background:#1A1A1A">
+        <span class="g-name">Ink</span>
+        <span class="g-meta">#1A1A1A · R26 G26 B26 · Gray/900 · 워드마크</span>
+        <span class="g-act" data-out>COPY HEX</span>
+      </button>
+      <button class="gel on-light c-dark" type="button" data-copy="#FAFAFA" data-label="COPY HEX" style="background:#FAFAFA">
+        <span class="g-name">Ground</span>
+        <span class="g-meta">#FAFAFA · R250 G250 B250 · Gray/50 · 화면 바탕</span>
+        <span class="g-act" data-out>COPY HEX</span>
+      </button>
     </div>
-
   </div>
 
   <!-- 타이포 -->
   <div class="section">
     <div class="sec-head">
       <h3 id="s-type">브랜드 서체</h3>
-      <a class="anchor-ic" href="#s-type" aria-label="서체 섹션 링크">🔗</a>
-      <a class="btn btn-sm side-btn" href="https://github.com/orioncactus/pretendard" target="_blank" rel="noopener">공식 배포처 보기</a>
+      <a class="anchor" href="#s-type" aria-label="서체 섹션 링크">#</a>
+      <a class="btn btn-sm side-btn" href="https://github.com/orioncactus/pretendard" target="_blank" rel="noopener">공식 배포처</a>
     </div>
     <p class="sec-desc">한국어·일본어·영어를 한 패밀리로 덮기 위해 Pretendard JP를 단일 서체로 씁니다. 언어별로 서체를 바꾸면 같은 화면에서 글자의 무게와 인상이 어긋나기 때문입니다.</p>
 
-    <div class="card">
-      <div class="type-hero" id="type-hero" style="--type-w:700">
+    <div class="panel">
+      <div class="type-stage" id="type-hero" style="--type-w:700">
         <div>
           <p class="big">Pretendard JP</p>
-          <p class="tri">다음 스타는 당신 · 次のスターはあなた · Be the Next Star</p>
+          <p class="tri">다음 스타는 당신 · <span lang="ja">次のスターはあなた</span> · <span lang="en">Be the Next Star</span></p>
         </div>
       </div>
-      <div class="opt-row" style="margin-top:20px">
-        <span class="lbl">웨이트</span>
-        <div class="seg" data-target="type-hero" data-attr="w" data-style="--type-w">
-          <button type="button" data-value="400" aria-pressed="false">Regular</button>
-          <button type="button" data-value="500" aria-pressed="false">Medium</button>
-          <button type="button" data-value="600" aria-pressed="false">SemiBold</button>
-          <button type="button" data-value="700" aria-pressed="true">Bold</button>
+      <div class="toolbar">
+        <div class="tb-text">
+          <p class="panel-title">Pretendard JP</p>
+          <p class="panel-desc">본문은 Regular·Medium, 제목과 강조는 SemiBold·Bold를 씁니다.</p>
+        </div>
+        <div class="tb-ctrl">
+          <div class="switch">
+            <span class="lbl">Weight</span>
+            <div class="seg" data-target="type-hero" data-attr="w" data-style="--type-w">
+              <button type="button" data-value="400" aria-pressed="false">Regular</button>
+              <button type="button" data-value="500" aria-pressed="false">Medium</button>
+              <button type="button" data-value="600" aria-pressed="false">SemiBold</button>
+              <button type="button" data-value="700" aria-pressed="true">Bold</button>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-
   </div>
+</div>
 
-<!-- ════════════ 4. 커뮤니케이션 ════════════ -->
+<!-- ════════════ 04 커뮤니케이션 ════════════ -->
 <div class="chapter" id="ch-comm">
-  <h2 class="chapter-title">커뮤니케이션</h2>
+  <div class="ch-head">
+    <span class="ch-num">04</span>
+    <h2 class="ch-title">커뮤니케이션</h2>
+    <span class="ch-rule"></span>
+  </div>
 
   <div class="section">
     <div class="sec-head">
       <h3 id="s-naming">브랜드명 표기 원칙</h3>
-      <a class="anchor-ic" href="#s-naming" aria-label="표기 원칙 섹션 링크">🔗</a>
+      <a class="anchor" href="#s-naming" aria-label="표기 원칙 섹션 링크">#</a>
     </div>
     <p class="sec-desc">릴라이브 브랜드명을 이미지가 아닌 텍스트로 표기할 경우, 다음의 표기법을 따라 주세요.</p>
 
     <div class="grid g2">
-      <div class="card rule-card" style="margin-top:0">
-        <p class="card-title">국문 표기</p>
-        <ol>
-          <li>문장 안에서 브랜드명을 한글로 표기할 경우 국문 사용을 원칙으로 합니다.<b>'릴라이브'</b></li>
-          <li>줄임말·변형 표기를 쓰지 않습니다.<b>'릴라', '리라이브' (✕)</b></li>
-          <li>서비스·이벤트명은 '릴라이브'와 띄어 씁니다.<b>'릴라이브 글로벌 오디션'</b></li>
-        </ol>
+      <div class="panel panel-pad" style="margin-top:0">
+        <p class="panel-title">국문 표기</p>
+        <ul class="rule-list">
+          <li><span class="n">01</span><span>문장 안에서 브랜드명을 한글로 표기할 경우 국문 사용을 원칙으로 합니다.<b>'릴라이브'</b></span></li>
+          <li><span class="n">02</span><span>줄임말·변형 표기를 쓰지 않습니다.<b>'릴라', '리라이브' (✕)</b></span></li>
+          <li><span class="n">03</span><span>서비스·이벤트명은 '릴라이브'와 띄어 씁니다.<b>'릴라이브 글로벌 오디션'</b></span></li>
+        </ul>
       </div>
-      <div class="card rule-card" style="margin-top:0">
-        <p class="card-title">영문 표기</p>
-        <ol>
-          <li>영어로 표기할 경우 첫 글자만 대문자로 씁니다.<b>'Rillive'</b></li>
-          <li>전체 대문자·소문자 표기는 로고타입 전용입니다. 본문에는 쓰지 않습니다.<b>'RILLIVE', 'rillive' (✕)</b></li>
-          <li>서비스명은 각 단어의 첫 글자를 대문자로 표기합니다.<b>'Rillive Global Audition'</b></li>
-        </ol>
+      <div class="panel panel-pad" style="margin-top:0">
+        <p class="panel-title">영문 표기</p>
+        <ul class="rule-list">
+          <li><span class="n">01</span><span>영어로 표기할 경우 첫 글자만 대문자로 씁니다.<b>'Rillive'</b></span></li>
+          <li><span class="n">02</span><span>전체 대문자·소문자 표기는 로고타입 전용입니다. 본문에는 쓰지 않습니다.<b>'RILLIVE', 'rillive' (✕)</b></span></li>
+          <li><span class="n">03</span><span>서비스명은 각 단어의 첫 글자를 대문자로 표기합니다.<b>'Rillive Global Audition'</b></span></li>
+        </ul>
       </div>
     </div>
   </div>
@@ -792,37 +976,37 @@ button { font-family: inherit; }
   <div class="section">
     <div class="sec-head">
       <h3 id="s-voice">보이스 &amp; 톤</h3>
-      <a class="anchor-ic" href="#s-voice" aria-label="보이스 섹션 링크">🔗</a>
+      <a class="anchor" href="#s-voice" aria-label="보이스 섹션 링크">#</a>
     </div>
     <p class="sec-desc">릴라이브의 모든 문장은 세 개 언어로 번역됩니다. 짧고, 구체적이고, 번역해도 온도가 남는 문장을 씁니다.</p>
 
     <div class="grid g2">
-      <div class="card" style="margin-top:0">
-        <p class="card-title">무대 아래에서 응원합니다</p>
+      <div class="panel panel-pad" style="margin-top:0">
+        <p class="panel-title">무대 아래에서 응원합니다</p>
         <p class="voice-why">브랜드는 심사위원이 아니라 첫 번째 팬입니다.</p>
         <div class="dd">
           <p class="dd-item do"><span class="k">DO</span><span>언어의 장벽을 넘어, 글로벌 무대의 주인공이 되세요.</span></p>
           <p class="dd-item no"><span class="k">NOT</span><span>당사의 AI 번역 솔루션을 이용해 보십시오.</span></p>
         </div>
       </div>
-      <div class="card" style="margin-top:0">
-        <p class="card-title">형용사 대신 숫자로 말합니다</p>
+      <div class="panel panel-pad" style="margin-top:0">
+        <p class="panel-title">형용사 대신 숫자로 말합니다</p>
         <p class="voice-why">"뛰어난"은 번역되면 사라지고, "95%"는 남습니다.</p>
         <div class="dd">
           <p class="dd-item do"><span class="k">DO</span><span>1초 미만 딜레이, 95% 정확도</span></p>
           <p class="dd-item no"><span class="k">NOT</span><span>업계 최고 수준의 압도적인 번역 성능</span></p>
         </div>
       </div>
-      <div class="card" style="margin-top:0">
-        <p class="card-title">기술이 아니라 연결을 말합니다</p>
+      <div class="panel panel-pad" style="margin-top:0">
+        <p class="panel-title">기술이 아니라 연결을 말합니다</p>
         <p class="voice-why">사용자가 사는 건 번역기가 아니라 통하는 순간입니다.</p>
         <div class="dd">
           <p class="dd-item do"><span class="k">DO</span><span>언어가 다르다고, 팬이 될 수 없는 건 아니니까.</span></p>
           <p class="dd-item no"><span class="k">NOT</span><span>실시간 다국어 번역 엔진 탑재</span></p>
         </div>
       </div>
-      <div class="card" style="margin-top:0">
-        <p class="card-title">짧게, 끊어서 씁니다</p>
+      <div class="panel panel-pad" style="margin-top:0">
+        <p class="panel-title">짧게, 끊어서 씁니다</p>
         <p class="voice-why">한 문장 한 메시지. 한국어는 단어 단위로 줄바꿈합니다.</p>
         <div class="dd">
           <p class="dd-item do"><span class="k">DO</span><span>당신의 무대가 기다립니다. 다음 스타는 당신입니다.</span></p>
@@ -833,25 +1017,37 @@ button { font-family: inherit; }
   </div>
 </div>
 
-<footer class="foot">
-  <span>© 2026 Rematch. 릴라이브 브랜드센터 v2.0</span>
-  <span class="mono">정본: 릴라이브 Design System (Figma) · Logo/Logo · Gradient/Main</span>
-</footer>
+</div>
+</main>
 
+<div class="wrap">
+  <footer class="foot">
+    <span>© 2026 REMATCH · 릴라이브 브랜드센터 v3.1</span>
+    <span>정본: 릴라이브 DESIGN SYSTEM (FIGMA) · Logo/Logo · Gradient/Main</span>
+  </footer>
 </div>
 
 <script>
 (function () {
   var root = document.documentElement;
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  // 테마 토글 — data-theme이 prefers-color-scheme을 양방향으로 덮는다
-  document.getElementById('tog').addEventListener('click', function () {
-    var cur = root.getAttribute('data-theme');
-    if (!cur) cur = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
-    root.setAttribute('data-theme', cur === 'dark' ? 'light' : 'dark');
+  // 테마 토글 — 기본은 다크(무대 위). 선택은 localStorage에 남고,
+  // 아이콘(달/해)과 aria-label이 현재 상태를 말해준다.
+  var tog = document.getElementById('tog');
+  function syncTheme() {
+    var isLight = root.getAttribute('data-theme') === 'light';
+    tog.setAttribute('aria-label', isLight ? '다크 모드로 전환' : '라이트 모드로 전환');
+  }
+  syncTheme();
+  tog.addEventListener('click', function () {
+    var next = (root.getAttribute('data-theme') || 'dark') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem('rillive-bc-theme', next); } catch (e) {}
+    syncTheme();
   });
 
-  // 세그먼트 토글(원티드 문법) — data-target의 data-attr을 전환.
+  // 스위치 — data-target의 data-attr을 전환.
   // data-style이 있으면 속성 대신 CSS 변수를 세팅(타이포 웨이트).
   document.querySelectorAll('.seg').forEach(function (seg) {
     seg.addEventListener('click', function (e) {
@@ -865,16 +1061,18 @@ button { font-family: inherit; }
       var styleVar = seg.getAttribute('data-style');
       if (styleVar) target.style.setProperty(styleVar, b.getAttribute('data-value'));
       else target.setAttribute('data-' + seg.getAttribute('data-attr'), b.getAttribute('data-value'));
+      syncDlLabels();
     });
   });
 
-  // Copy Hex / Copy CSS
+  // 컬러 밴드 복사 — 피드백은 [data-out] 안에서만 바꾼다(밴드 내용을 지우지 않도록).
   document.querySelectorAll('[data-copy]').forEach(function (btn) {
+    var out = btn.querySelector('[data-out]') || btn;
     btn.addEventListener('click', function () {
       var val = btn.getAttribute('data-copy');
       var done = function () {
-        btn.textContent = 'Copied!';
-        setTimeout(function () { btn.textContent = btn.getAttribute('data-label'); }, 1200);
+        out.textContent = 'COPIED!';
+        setTimeout(function () { out.textContent = btn.getAttribute('data-label'); }, 1200);
       };
       if (navigator.clipboard && navigator.clipboard.writeText) {
         navigator.clipboard.writeText(val).then(done, done);
@@ -921,32 +1119,51 @@ button { font-family: inherit; }
     return bytes;
   }
 
-  // 전체 다운로드 — 로고 패키지 zip (base64 → blob)
+  // 전체 다운로드 — 로고 패키지 zip (base64 → blob). 내비와 히어로 두 곳에 있다.
   var ZIP_B64 = "__ZIP_B64__";
-  document.getElementById('dl-all').addEventListener('click', function () {
-    downloadBlob(new Blob([b64ToBytes(ZIP_B64)], { type: 'application/zip' }), 'rillive-logo-package.zip');
+  document.querySelectorAll('[data-dl-all]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      downloadBlob(new Blob([b64ToBytes(ZIP_B64)], { type: 'application/zip' }), 'rillive-logo-package.zip');
+    });
   });
 
-  // 카드별 다운로드 — 토글의 현재 상태에 맞는 SVG를 내려준다
+  // 카드별 다운로드 — 스위치의 현재 상태에 맞는 SVG를 내려준다
   var LOGO_SVGS = __LOGO_JSON__;
+  function variantKey(btn) {
+    var panel = document.getElementById(btn.getAttribute('data-panel'));
+    var kind = btn.getAttribute('data-dl');
+    var bg = panel.getAttribute('data-bg');
+    var logo = panel.getAttribute('data-logo');
+    var variant = logo === 'mono'
+      ? (bg === 'light' ? 'black' : 'white')
+      : (bg === 'dark' && kind !== 'symbol' ? 'color-on-dark' : 'color');
+    return kind + '-' + variant;
+  }
+  // 버튼 라벨이 "SVG"뿐이면 어떤 변형을 받는지 알 수 없다 — 상태를 이름에 실어준다.
+  var KIND_KO = { horizontal: '시그니처 로고', symbol: '심볼 로고' };
+  var VAR_KO = { color: '컬러', 'color-on-dark': '다크 배경용 컬러', black: '블랙', white: '화이트' };
+  function syncDlLabels() {
+    document.querySelectorAll('[data-dl]').forEach(function (btn) {
+      var key = variantKey(btn);
+      var i = key.indexOf('-');
+      var label = KIND_KO[key.slice(0, i)] + ' ' + VAR_KO[key.slice(i + 1)] + ' SVG 다운로드';
+      btn.setAttribute('aria-label', label);
+      btn.setAttribute('title', label);
+    });
+  }
+  syncDlLabels();
   document.querySelectorAll('[data-dl]').forEach(function (btn) {
     btn.addEventListener('click', function () {
-      var panel = document.getElementById(btn.getAttribute('data-panel'));
-      var kind = btn.getAttribute('data-dl');
-      var bg = panel.getAttribute('data-bg');
-      var logo = panel.getAttribute('data-logo');
-      var variant = logo === 'mono'
-        ? (bg === 'light' ? 'black' : 'white')
-        : (bg === 'dark' && kind !== 'symbol' ? 'color-on-dark' : 'color');
-      var key = kind + '-' + variant;
+      var key = variantKey(btn);
       var svg = LOGO_SVGS[key];
       if (!svg) return;
       downloadBlob(new Blob([svg], { type: 'image/svg+xml' }), 'rillive-' + key + '.svg');
     });
   });
 
-  // 현재 챕터 하이라이트 — 교차 집합 유지 방식(개별 entry 반응은 히어로 구간에서 직전 값이 남는다)
-  var links = Array.prototype.slice.call(document.querySelectorAll('#navlinks a'));
+  // 큐시트 현재 챕터 — 교차 집합 유지 방식(개별 entry 반응은 히어로 구간에서 직전 값이 남는다)
+  var rail = document.getElementById('rail');
+  var links = Array.prototype.slice.call(document.querySelectorAll('#rail a'));
   var secs = links.map(function (a) { return document.querySelector(a.getAttribute('href')); });
   var visible = [];
   var obs = new IntersectionObserver(function (entries) {
@@ -958,6 +1175,14 @@ button { font-family: inherit; }
     var i = -1;
     secs.forEach(function (s, j) { if (i === -1 && visible.indexOf(s) !== -1) i = j; });
     links.forEach(function (l, j) { l.setAttribute('aria-current', String(i === j)); });
+    // 좁은 화면에서 레일이 가로로 스크롤될 때, 활성 챕터가 화면 밖이면 끌어온다
+    if (i > -1 && rail.scrollWidth > rail.clientWidth + 4) {
+      var el = links[i];
+      var r = el.getBoundingClientRect(), rr = rail.getBoundingClientRect();
+      if (r.left < rr.left + 12 || r.right > rr.right - 12) {
+        rail.scrollTo({ left: Math.max(0, el.offsetLeft - 20), behavior: reduceMotion ? 'auto' : 'smooth' });
+      }
+    }
   }, { rootMargin: '-20% 0px -55% 0px' });
   secs.forEach(function (s) { if (s) obs.observe(s); });
 })();

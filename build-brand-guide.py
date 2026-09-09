@@ -190,7 +190,7 @@ def build_head_meta():
     desc = "릴라이브 브랜드 로고·컬러·타이포·에셋 가이드라인과 다운로드 리소스"
     return "\n".join([
         f'<link rel="icon" type="image/svg+xml" href="{fav_uri}">',
-        '<meta name="theme-color" content="#7D55FF">',
+        '<meta name="theme-color" content="#0D0C11">',
         f'<meta name="description" content="{desc}">',
         '<meta property="og:type" content="website">',
         '<meta property="og:title" content="릴라이브 브랜드센터">',
