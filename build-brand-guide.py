@@ -176,7 +176,7 @@ png/  투명 배경 래스터 (horizontal 1662px · vertical 1134px · symbol 10
     return logo_json, ZIP_PATH.read_bytes()
 
 
-BASE_URL = "https://rillive-brandcenter.pages.dev"  # 배포 도메인 (OG 절대경로용)
+BASE_URL = "https://rillive-brand-system.pages.dev"  # 배포 도메인 (OG 절대경로용)
 
 
 def build_head_meta():
