@@ -12,3 +12,6 @@ RILLIVE_LANDING.md
 브랜드센터-수정-프롬프트.md
 figma-plugins/
 archive/
+
+# wrangler 배포 캐시
+.wrangler/
