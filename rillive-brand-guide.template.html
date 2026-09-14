@@ -214,7 +214,7 @@ button { font-family: inherit; }
 .hero-lock.wake .eyes { animation: hero-glance 1.2s cubic-bezier(.3,.7,.3,1) .15s both; }
 @keyframes hero-turn   { 0% { transform: rotateY(0); } 28% { transform: rotateY(-12deg); } 56% { transform: rotateY(12deg); } 100% { transform: rotateY(0); } }
 @keyframes hero-glance { 0% { transform: translate(0,0); } 28% { transform: translate(-1.3px,.2px); } 56% { transform: translate(1.3px,.2px); } 100% { transform: translate(0,0); } }
-.hero-lock .u-mk { width: 56px; height: 56px; }
+.hero-lock .u-mk { width: 60px; height: 60px; }
 /* 헤드라인 안의 워드마크 — 밑변이 곧 글자 베이스라인이라 baseline 정렬로 맞는다 */
 .h1-wm {
   display: inline-block; height: .72em; width: auto;
@@ -232,14 +232,8 @@ button { font-family: inherit; }
 
 /* ── Chapter / Section ──────────────────────────────── */
 .chapter { padding-top: clamp(56px, 7.5vw, 96px); scroll-margin-top: 132px; }
-.ch-head { display: flex; align-items: center; gap: 16px; }
-.ch-num {
-  font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 0;
-  background: var(--brand-grad); -webkit-background-clip: text; background-clip: text;
-  color: transparent; flex: none;
-}
-.ch-title { font-size: clamp(24px, 3.2vw, 33px); font-weight: 700; letter-spacing: -.032em; flex: none; }
-.ch-rule { flex: 1; height: 1px; background: var(--line); }
+.ch-head { display: flex; align-items: baseline; }
+.ch-title { font-size: clamp(30px, 4.2vw, 46px); font-weight: 700; letter-spacing: -.035em; }
 
 .section { padding-top: clamp(36px, 5.5vw, 56px); scroll-margin-top: 132px; }
 .sec-head h3[id] { scroll-margin-top: 132px; }
@@ -745,9 +739,7 @@ table.roles { width: 100%; border-collapse: collapse; min-width: 680px; }
 <!-- ════════════ 01 브랜드 로고 ════════════ -->
 <div class="chapter" id="ch-logo">
   <div class="ch-head">
-    <span class="ch-num">01</span>
-    <h2 class="ch-title">브랜드 로고</h2>
-    <span class="ch-rule"></span>
+    <h2 class="ch-title">Logo</h2>
   </div>
 
   <div class="section">
@@ -860,9 +852,7 @@ table.roles { width: 100%; border-collapse: collapse; min-width: 680px; }
 <!-- ════════════ 02 로고 사용 규정 ════════════ -->
 <div class="chapter" id="ch-rules">
   <div class="ch-head">
-    <span class="ch-num">02</span>
-    <h2 class="ch-title">로고 사용 규정</h2>
-    <span class="ch-rule"></span>
+    <h2 class="ch-title">Logo Usage</h2>
   </div>
 
   <div class="section">
@@ -970,9 +960,7 @@ table.roles { width: 100%; border-collapse: collapse; min-width: 680px; }
 <!-- ════════════ 03 브랜드 에셋 ════════════ -->
 <div class="chapter" id="ch-assets">
   <div class="ch-head">
-    <span class="ch-num">03</span>
-    <h2 class="ch-title">브랜드 에셋</h2>
-    <span class="ch-rule"></span>
+    <h2 class="ch-title">Brand Assets</h2>
   </div>
 
   <!-- 컬러 -->
@@ -1197,9 +1185,7 @@ table.roles { width: 100%; border-collapse: collapse; min-width: 680px; }
 <!-- ════════════ 04 커뮤니케이션 ════════════ -->
 <div class="chapter" id="ch-comm">
   <div class="ch-head">
-    <span class="ch-num">04</span>
-    <h2 class="ch-title">커뮤니케이션</h2>
-    <span class="ch-rule"></span>
+    <h2 class="ch-title">Communication</h2>
   </div>
 
   <div class="section">
