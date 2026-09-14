@@ -29,6 +29,9 @@ __FONTFACE__
   --ink-4: #898B95;   /* AA 4.5:1 확보 — 구 #5E606A는 3.1:1 */
   --line: rgba(255,255,255,.09);
   --line-strong: rgba(255,255,255,.17);
+  --seg-bg: rgba(255,255,255,.07);
+  --seg-on: #2C2A36;
+  --seg-shadow: 0 1px 3px rgba(0,0,0,.5);
   --fill: rgba(255,255,255,.055);
   --primary: #9B75FF;
   --positive: #4ADE80;
@@ -54,6 +57,9 @@ __FONTFACE__
   --ink-4: #6B6E76;   /* AA 4.5:1 확보 — 구 #9A9CA4는 2.6:1 */
   --line: rgba(20,19,24,.10);
   --line-strong: rgba(20,19,24,.20);
+  --seg-bg: rgba(20,19,24,.06);
+  --seg-on: #FFFFFF;
+  --seg-shadow: 0 1px 3px rgba(20,19,24,.16);
   --fill: rgba(20,19,24,.04);
   --primary: #7D55FF;
   --positive: #15803D;
@@ -98,39 +104,39 @@ button { font-family: inherit; }
 }
 .nav-host { position: relative; }
 .nav-in {
-  padding: 0 clamp(16px, 1.8vw, 24px); height: 60px;
-  display: flex; align-items: center; gap: 14px;
+  padding: 0 clamp(20px, 2.4vw, 34px); height: 72px;
+  display: flex; align-items: center; gap: 18px;
 }
-.nav-mark { display: flex; align-items: center; gap: 12px; flex: none; text-decoration: none; margin-right: auto; }
-.nm-lock { display: flex; align-items: center; gap: 9px; }
-.nav-mark .nm-mk { width: 26px; height: 26px; }
-.nav-mark .nm-wm { height: 13px; width: auto; fill: var(--ink); }
-.nav-mark b { font-size: 14.5px; font-weight: 700; letter-spacing: -.02em; }
+.nav-mark { display: flex; align-items: center; gap: 14px; flex: none; text-decoration: none; margin-right: auto; }
+.nm-lock { display: flex; align-items: center; gap: 10px; }
+.nav-mark .nm-mk { width: 30px; height: 30px; }
+.nav-mark .nm-wm { height: 15px; width: auto; fill: var(--ink); }
+.nav-mark b { font-size: 16px; font-weight: 700; letter-spacing: -.02em; }
 .nav-mark .ver {
-  font-family: var(--mono); font-size: 10.5px; letter-spacing: 0;
-  color: var(--ink-4); padding-left: 10px; margin-left: 2px;
+  font-family: var(--mono); font-size: 11.5px; letter-spacing: 0;
+  color: var(--ink-4); padding-left: 12px; margin-left: 2px;
   border-left: 1px solid var(--line);
 }
 
 /* 1순위 액션만 브랜드 그라데이션을 입는다 */
 .btn-grad {
-  flex: none; height: 36px; padding: 0 16px; border: 0; border-radius: 10px;
+  flex: none; height: 42px; padding: 0 20px; border: 0; border-radius: 12px;
   background: var(--brand-grad); color: #FFFFFF;
-  font-size: 13px; font-weight: 700; letter-spacing: -.01em;
+  font-size: 14.5px; font-weight: 700; letter-spacing: -.01em;
   cursor: pointer; display: inline-flex; align-items: center; gap: 8px;
   text-decoration: none; transition: filter .15s, transform .12s;
 }
 .btn-grad:hover { filter: brightness(1.08); }
 .btn-grad:active { transform: translateY(1px); }
-.btn-grad svg { width: 14px; height: 14px; fill: none; stroke: currentColor; stroke-width: 1.8; }
+.btn-grad svg { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 1.8; }
 
 .icon-btn {
-  flex: none; width: 36px; height: 36px; border-radius: 10px;
+  flex: none; width: 42px; height: 42px; border-radius: 12px;
   border: 1px solid var(--line); background: transparent; color: var(--ink-3);
   cursor: pointer; display: grid; place-items: center; transition: border-color .15s, color .15s;
 }
 .icon-btn:hover { border-color: var(--line-strong); color: var(--ink); }
-.icon-btn svg { width: 16px; height: 16px; }
+.icon-btn svg { width: 18px; height: 18px; }
 .icon-btn .ic-light { display: none; }
 :root[data-theme="light"] .icon-btn .ic-dark { display: none; }
 :root[data-theme="light"] .icon-btn .ic-light { display: block; }
@@ -139,40 +145,32 @@ button { font-family: inherit; }
    화면 왼쪽 끝 상단에 고정되는 사이드바(SEED 문법).
    좁은 화면에서는 같은 DOM이 상단 바 아래 가로 스트립으로 접힌다. */
 .rail {
-  position: fixed; top: 61px; left: 0; bottom: 0; width: 236px; z-index: 35;
-  display: none; flex-direction: column; gap: 1px;
-  padding: 26px 14px 32px; overflow-y: auto; overscroll-behavior: contain;
+  position: fixed; top: 73px; left: 0; bottom: 0; width: 252px; z-index: 35;
+  display: none; flex-direction: column; gap: 2px;
+  padding: 30px 16px 36px; overflow-y: auto; overscroll-behavior: contain;
   border-right: 1px solid var(--line); background: var(--ground);
 }
 .rail a {
-  display: flex; align-items: center; gap: 10px;
-  padding: 8px 12px; border-radius: 8px;
+  display: flex; align-items: center;
+  padding: 9px 12px; border-radius: 9px;
   text-decoration: none; color: var(--ink-3);
   transition: color .15s, background .15s;
 }
-.rail a i {
-  font-family: var(--mono); font-style: normal; font-size: 10.5px;
-  letter-spacing: 0; color: var(--ink-4); flex: none; min-width: 18px;
-}
-.rail a span { font-size: 13px; font-weight: 600; letter-spacing: -.01em; }
+.rail a span { font-size: 14.5px; font-weight: 700; letter-spacing: -.01em; }
 .rail .r-sec {
-  padding-left: 34px; font-size: 12.5px; font-weight: 500; color: var(--ink-4);
+  padding-left: 26px; font-size: 13.5px; font-weight: 500; color: var(--ink-4);
 }
-.rail .r-ch { margin-top: 10px; }
+.rail .r-ch { margin-top: 16px; }
 .rail .r-ch:first-of-type { margin-top: 0; }
 .rail a:hover { color: var(--ink-2); background: var(--fill); }
 .rail a[aria-current="true"] { color: var(--ink); background: var(--fill); }
-.rail .r-ch[aria-current="true"] i {
-  background: var(--brand-grad); -webkit-background-clip: text; background-clip: text;
-  color: transparent;
-}
-@media (min-width: 1280px) {
+@media (min-width: 1300px) {
   .rail { display: flex; }
-  main, .foot-host { padding-left: 236px; }
+  main, .foot-host { padding-left: 252px; }
 }
-@media (max-width: 1279px) {
+@media (max-width: 1299px) {
   .rail {
-    position: sticky; top: 60px; left: auto; bottom: auto; width: auto;
+    position: sticky; top: 72px; left: auto; bottom: auto; width: auto;
     display: flex; flex-direction: row; gap: 2px;
     max-width: 920px; margin: 0 auto; padding: 8px 28px;
     overflow-x: auto; scrollbar-width: none; border-right: 0;
@@ -180,14 +178,14 @@ button { font-family: inherit; }
     border-bottom: 1px solid var(--line);
   }
   .rail::-webkit-scrollbar { display: none; }
-  .rail a { flex: none; padding: 6px 11px; }
+  .rail a { flex: none; padding: 7px 12px; }
   .rail .r-sec { display: none; }   /* 좁은 화면에서는 챕터만 */
   .rail .r-ch { margin-top: 0; }
 }
 
 /* ── Hero — 스포트라이트가 켜지는 순간 ──────────────── */
 .hero {
-  position: relative; isolation: isolate;
+  position: relative; isolation: isolate; overflow-x: clip;
   padding: clamp(72px, 11vw, 132px) 0 clamp(40px, 5vw, 64px);
   text-align: center;
 }
@@ -233,7 +231,7 @@ button { font-family: inherit; }
 }
 
 /* ── Chapter / Section ──────────────────────────────── */
-.chapter { padding-top: clamp(56px, 7.5vw, 96px); scroll-margin-top: 120px; }
+.chapter { padding-top: clamp(56px, 7.5vw, 96px); scroll-margin-top: 132px; }
 .ch-head { display: flex; align-items: center; gap: 16px; }
 .ch-num {
   font-family: var(--mono); font-size: 12px; font-weight: 700; letter-spacing: 0;
@@ -243,8 +241,8 @@ button { font-family: inherit; }
 .ch-title { font-size: clamp(24px, 3.2vw, 33px); font-weight: 700; letter-spacing: -.032em; flex: none; }
 .ch-rule { flex: 1; height: 1px; background: var(--line); }
 
-.section { padding-top: clamp(36px, 5.5vw, 56px); scroll-margin-top: 120px; }
-.sec-head h3[id] { scroll-margin-top: 120px; }
+.section { padding-top: clamp(36px, 5.5vw, 56px); scroll-margin-top: 132px; }
+.sec-head h3[id] { scroll-margin-top: 132px; }
 .sec-head { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
 .sec-head h3 { font-size: clamp(17px, 2vw, 21px); font-weight: 700; letter-spacing: -.025em; }
 /* 앵커는 상시 노출 — hover로만 뜨면 터치 기기에서 영영 보이지 않는다.
@@ -319,30 +317,20 @@ button { font-family: inherit; }
 .tb-text { flex: 1 1 300px; min-width: 0; }
 .tb-ctrl { display: flex; align-items: center; gap: 22px; flex-wrap: wrap; margin-left: auto; }
 
-/* ── Switch — 필 세그먼트 대신 밑줄 스위치 ──────────── */
-.switch { display: flex; align-items: center; gap: 12px; }
-.switch .lbl {
-  font-family: var(--mono); font-size: 10px; letter-spacing: 0;
-  text-transform: uppercase; color: var(--ink-4); flex: none;
-}
-.seg { display: inline-flex; gap: 2px; }
+/* ── 세그먼트 토글 — 필 안에서 선택된 칸이 떠오르는 방식 ── */
+.switch { display: flex; align-items: center; gap: 14px; }
+.switch .lbl { font-size: 13.5px; font-weight: 700; color: var(--ink-2); flex: none; }
+.seg { display: inline-flex; background: var(--seg-bg); border-radius: 999px; padding: 3px; }
 .seg button {
-  position: relative; border: 0; background: transparent; color: var(--ink-4);
-  font-family: var(--mono); font-size: 11.5px; letter-spacing: 0;
-  text-transform: uppercase; padding: 9px 4px 11px; margin: 0 7px;
-  cursor: pointer; transition: color .15s;
-}
-.seg button:first-child { margin-left: 0; }
-.seg button::after {
-  content: ""; position: absolute; left: 0; right: 0; bottom: 5px; height: 2px;
-  border-radius: 2px; background: var(--brand-grad);
-  transform: scaleX(0); transform-origin: 50% 50%; transition: transform .18s;
+  border: 0; background: transparent; color: var(--ink-4);
+  font-size: 13.5px; font-weight: 600; letter-spacing: -.01em;
+  padding: 7px 18px; border-radius: 999px; cursor: pointer;
+  transition: background .15s, color .15s, box-shadow .15s;
 }
 .seg button:hover { color: var(--ink-2); }
-.seg button[aria-pressed="true"] { color: var(--ink); }
-.seg button[aria-pressed="true"]::after { transform: scaleX(1); }
-/* 밝은 스페시먼 위에 얹히는 스위치(필요 시) */
-.on-spec .seg button[aria-pressed="true"] { color: inherit; }
+.seg button[aria-pressed="true"] {
+  background: var(--seg-on); color: var(--ink); box-shadow: var(--seg-shadow);
+}
 
 /* ── Buttons ────────────────────────────────────────── */
 .btn {
@@ -713,16 +701,16 @@ table.roles { width: 100%; border-collapse: collapse; min-width: 680px; }
 
 <!-- ── Chapter rail (큐시트) ── -->
 <nav class="rail" id="rail" aria-label="목차">
-  <a class="r-ch" href="#ch-logo"><i>01</i><span>브랜드 로고</span></a>
+  <a class="r-ch" href="#ch-logo"><span>Logo</span></a>
   <a class="r-sec" href="#s-signature" data-ch="#ch-logo">시그니처 로고</a>
-  <a class="r-ch" href="#ch-rules"><i>02</i><span>로고 사용 규정</span></a>
+  <a class="r-ch" href="#ch-rules"><span>Logo Usage</span></a>
   <a class="r-sec" href="#s-space" data-ch="#ch-rules">여백 &amp; 최소 크기</a>
   <a class="r-sec" href="#s-misuse" data-ch="#ch-rules">로고 사용 시 유의사항</a>
-  <a class="r-ch" href="#ch-assets"><i>03</i><span>브랜드 에셋</span></a>
+  <a class="r-ch" href="#ch-assets"><span>Brand Assets</span></a>
   <a class="r-sec" href="#s-color" data-ch="#ch-assets">브랜드 컬러</a>
   <a class="r-sec" href="#s-context" data-ch="#ch-assets">적용 예시</a>
   <a class="r-sec" href="#s-type" data-ch="#ch-assets">브랜드 서체</a>
-  <a class="r-ch" href="#ch-comm"><i>04</i><span>커뮤니케이션</span></a>
+  <a class="r-ch" href="#ch-comm"><span>Communication</span></a>
   <a class="r-sec" href="#s-naming" data-ch="#ch-comm">브랜드명 표기 원칙</a>
   <a class="r-sec" href="#s-partner" data-ch="#ch-comm">파트너십 표기</a>
 </nav>
@@ -785,14 +773,14 @@ table.roles { width: 100%; border-collapse: collapse; min-width: 680px; }
         </div>
         <div class="tb-ctrl">
           <div class="switch">
-            <span class="lbl">BG</span>
+            <span class="lbl">배경 컬러</span>
             <div class="seg" data-target="sig-panel" data-attr="bg">
               <button type="button" data-value="light" aria-pressed="true">Light</button>
               <button type="button" data-value="dark" aria-pressed="false">Dark</button>
             </div>
           </div>
           <div class="switch">
-            <span class="lbl">Logo</span>
+            <span class="lbl">로고 컬러</span>
             <div class="seg" data-target="sig-panel" data-attr="logo">
               <button type="button" data-value="color" aria-pressed="true">Color</button>
               <button type="button" data-value="mono" aria-pressed="false">Mono</button>
@@ -821,14 +809,14 @@ table.roles { width: 100%; border-collapse: collapse; min-width: 680px; }
         </div>
         <div class="tb-ctrl">
           <div class="switch">
-            <span class="lbl">BG</span>
+            <span class="lbl">배경 컬러</span>
             <div class="seg" data-target="sym-panel" data-attr="bg">
               <button type="button" data-value="light" aria-pressed="true">Light</button>
               <button type="button" data-value="dark" aria-pressed="false">Dark</button>
             </div>
           </div>
           <div class="switch">
-            <span class="lbl">Logo</span>
+            <span class="lbl">로고 컬러</span>
             <div class="seg" data-target="sym-panel" data-attr="logo">
               <button type="button" data-value="color" aria-pressed="true">Color</button>
               <button type="button" data-value="mono" aria-pressed="false">Mono</button>
@@ -900,7 +888,7 @@ table.roles { width: 100%; border-collapse: collapse; min-width: 680px; }
         </div>
         <div class="tb-ctrl">
           <div class="switch">
-            <span class="lbl">Guide</span>
+            <span class="lbl">가이드</span>
             <div class="seg" data-target="clear-panel" data-attr="guide">
               <button type="button" data-value="view" aria-pressed="true">View</button>
               <button type="button" data-value="hide" aria-pressed="false">Hide</button>
@@ -1192,7 +1180,7 @@ table.roles { width: 100%; border-collapse: collapse; min-width: 680px; }
         </div>
         <div class="tb-ctrl">
           <div class="switch">
-            <span class="lbl">Weight</span>
+            <span class="lbl">웨이트</span>
             <div class="seg" data-target="type-hero" data-attr="w" data-style="--type-w">
               <button type="button" data-value="400" aria-pressed="false">Regular</button>
               <button type="button" data-value="500" aria-pressed="false">Medium</button>
