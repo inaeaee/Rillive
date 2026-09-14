@@ -88,10 +88,6 @@ button { font-family: inherit; }
 
 .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
 .roles .num, .roles .on, .log .d, .color-card .c-vals, .size-item .s-lbl { font-variant-numeric: tabular-nums; }
-.kicker {
-  font-family: var(--mono); font-size: 11px; letter-spacing: 0;
-  text-transform: uppercase; color: var(--ink-4);
-}
 .wrap { max-width: 920px; margin: 0 auto; padding: 0 28px; }
 
 /* ── Top bar — 링크 필 없이 얇은 풀블리드 바 ────────── */
@@ -203,23 +199,35 @@ button { font-family: inherit; }
   background: radial-gradient(circle at 50% 40%, var(--beam-1) 0%, var(--beam-2) 34%, transparent 66%);
   pointer-events: none;
 }
-.hero-lock { display: inline-flex; align-items: center; gap: 18px; margin-bottom: 30px; }
-.hero-lock .u-mk { width: 52px; height: 52px; }
-.hero-lock .u-wm { height: 38px; width: auto; fill: var(--ink); }
+.hero-lock { display: inline-flex; align-items: center; margin-bottom: 26px; perspective: 420px; }
+/* ── 히어로 심볼 인터랙션 ────────────────────────────
+   커서를 따라 눈동자가 움직이고 판형이 3D로 고개를 돌린다.
+   얼굴은 판형보다 더 미끄러져 두께가 생긴다. 심볼에 커서가 닿으면 한 번 튄다.
+   로고 원본 패스는 건드리지 않고 transform만 쓴다. */
+.hero-mk .plate, .hero-mk .face-g, .hero-mk .pupil, .hero-mk .eyes { transform-box: fill-box; transform-origin: 50% 50%; }
+.hero-mk { transform: rotateY(var(--ry, 0deg)) rotateX(var(--rx, 0deg)); transition: transform .30s cubic-bezier(.2,.8,.3,1); transform-style: preserve-3d; cursor: default; }
+.hero-mk .face-g { transform: translate(var(--fx, 0px), var(--fy, 0px)); transition: transform .30s cubic-bezier(.2,.8,.3,1); }
+.hero-mk .pupil  { transform: translate(var(--px, 0px), var(--py, 0px)); transition: transform .38s cubic-bezier(.3,1.5,.4,1); }
+.hero-lock.bump .hero-mk { animation: hero-bounce .5s cubic-bezier(.2,1.4,.4,1) both; }
+@keyframes hero-bounce { 0% { scale: 1; } 40% { scale: 1.12 .94; } 70% { scale: .97 1.04; } 100% { scale: 1; } }
+.hero-lock.wake { animation: hero-turn 1.2s cubic-bezier(.3,.7,.3,1) .15s both; }
+.hero-lock.wake .eyes { animation: hero-glance 1.2s cubic-bezier(.3,.7,.3,1) .15s both; }
+@keyframes hero-turn   { 0% { transform: rotateY(0); } 28% { transform: rotateY(-12deg); } 56% { transform: rotateY(12deg); } 100% { transform: rotateY(0); } }
+@keyframes hero-glance { 0% { transform: translate(0,0); } 28% { transform: translate(-1.3px,.2px); } 56% { transform: translate(1.3px,.2px); } 100% { transform: translate(0,0); } }
+.hero-lock .u-mk { width: 56px; height: 56px; }
+/* 헤드라인 안의 워드마크 — 밑변이 곧 글자 베이스라인이라 baseline 정렬로 맞는다 */
+.h1-wm {
+  display: inline-block; height: .72em; width: auto;
+  fill: currentColor; margin: 0 .05em;
+}
 .hero h1 {
   font-size: clamp(25px, 3.5vw, 39px); font-weight: 700;
   line-height: 1.44; letter-spacing: -.034em;
   max-width: 30ch; margin: 0 auto;
 }
-.hero .eyebrow { margin-bottom: 18px; }
 .hero-lead {
   margin: 18px auto 0; max-width: 40ch;
   font-size: clamp(14px, 1.5vw, 16.5px); line-height: 1.7; color: var(--ink-3);
-}
-/* 무대 바닥 — 조명이 끝나는 선 */
-.stage-line {
-  height: 1px; border: 0; margin: clamp(32px, 4.5vw, 48px) 0 0;
-  background: linear-gradient(90deg, transparent, var(--line-strong) 22%, var(--line-strong) 78%, transparent);
 }
 
 /* ── Chapter / Section ──────────────────────────────── */
@@ -519,6 +527,49 @@ table.roles { width: 100%; border-collapse: collapse; min-width: 680px; }
 .shot-banner .lock svg.mk { width: 34px; height: 34px; }
 .shot-banner .lock svg.wm { width: 76px; height: auto; fill: #FFFFFF; }
 
+/* ── 파트너십 공동 락업 ──────────────────────────────
+   파트너 로고는 실물을 쓸 수 없으므로 중립 플레이스홀더로 대신한다.
+   간격 단위 X는 보호 여백과 같은 값(심볼 높이의 1/2)을 쓴다. */
+.co-stage { min-height: 200px; }
+.co-lock { display: flex; align-items: center; }
+.co-lock .rl { display: flex; align-items: center; gap: 11px; }
+.co-lock .rl .mk { width: 40px; height: 40px; }
+.co-lock .rl .wm { width: 88px; height: auto; fill: var(--ink); }
+/* 구분선: 두께 2px, 높이 1.5X, 좌우 여백 각각 X */
+.co-div {
+  width: 2px; height: 30px; border-radius: 1px;
+  background: var(--line-strong); margin: 0 20px; flex: none;
+}
+/* 금지 타일은 심볼이 28px이라 X=14 — 같은 비율로 줄인다 */
+.miss-box .co-div { height: 21px; margin: 0 14px; }
+/* 파트너 로고 자리 — 중립 도형 + 워드마크 */
+.ph { display: flex; align-items: center; gap: 10px; color: var(--ink-3); }
+.ph i { width: 34px; height: 34px; border-radius: 50%; border: 2.5px solid currentColor; flex: none; }
+.ph b { font-size: 17px; font-weight: 700; }
+.co-note {
+  margin-top: 14px; display: flex; gap: 18px; flex-wrap: wrap;
+  font-size: 12.5px; color: var(--ink-3);
+}
+.co-note span b { color: var(--ink); font-weight: 700; }
+/* 금지 타일 안에서 쓰는 변형 */
+.m-tight .co-div { display: none; }
+.m-tight .co-lock { gap: 6px; }
+.m-paint .ph { color: transparent; }
+.m-paint .ph i {
+  border: 0; background: var(--brand-grad);
+}
+.m-paint .ph b {
+  background: var(--brand-grad); -webkit-background-clip: text; background-clip: text;
+}
+.m-inside .ph i {
+  border: 0; border-radius: 8px; background: var(--brand-grad);
+  display: grid; place-items: center;
+}
+.m-inside .ph i::after {
+  content: ""; width: 12px; height: 12px; border-radius: 50%;
+  border: 2px solid #FFFFFF;
+}
+
 /* ── 변경 이력 ──────────────────────────────────────── */
 .log { list-style: none; margin: 16px 0 0; padding: 0; }
 .log li {
@@ -592,8 +643,7 @@ table.roles { width: 100%; border-collapse: collapse; min-width: 680px; }
   .tb-ctrl { margin-left: 0; gap: 16px; }
   .hero h1 { max-width: 22ch; }
   .hero-lead { max-width: 28ch; }
-  .hero-lock .u-mk { width: 42px; height: 42px; }
-  .hero-lock .u-wm { height: 31px; }
+  .hero-lock .u-mk { width: 46px; height: 46px; }
 }
 /* 좁은 화면에서는 상단 바를 심볼 + 액션만 남긴다 */
 @media (max-width: 520px) {
@@ -601,6 +651,7 @@ table.roles { width: 100%; border-collapse: collapse; min-width: 680px; }
 }
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
+  .hero-mk, .hero-mk .face-g, .hero-mk .pupil { transform: none !important; }
 }
 </style>
 
@@ -649,7 +700,7 @@ table.roles { width: 100%; border-collapse: collapse; min-width: 680px; }
           <svg class="nm-wm" viewBox="66 5.6 141.7 35.93" role="img" aria-label="Rillive"><use href="#wm"/></svg>
         </span>
         <b>브랜드 시스템</b>
-        <span class="ver">v1.0</span>
+        <span class="ver">v1.1</span>
       </a>
       <button class="btn-grad" type="button" data-dl-all>
         <svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2v8.5M4.6 7.4 8 10.8l3.4-3.4M3 13.4h10"/></svg>
@@ -684,6 +735,7 @@ table.roles { width: 100%; border-collapse: collapse; min-width: 680px; }
   <a class="r-sec" href="#s-type" data-ch="#ch-assets">브랜드 서체</a>
   <a class="r-ch" href="#ch-comm"><i>04</i><span>커뮤니케이션</span></a>
   <a class="r-sec" href="#s-naming" data-ch="#ch-comm">브랜드명 표기 원칙</a>
+  <a class="r-sec" href="#s-partner" data-ch="#ch-comm">파트너십 표기</a>
   <a class="r-ch" href="#s-changelog"><i aria-hidden="true"></i><span>변경 이력</span></a>
 </nav>
 
@@ -692,15 +744,24 @@ table.roles { width: 100%; border-collapse: collapse; min-width: 680px; }
 <!-- ── Hero ── -->
 <header class="hero">
   <div class="wrap">
-    <span class="hero-lock">
-      <svg class="u-mk" viewBox="0 0 48 48" aria-hidden="true"><use href="#mk"/></svg>
-      <svg class="u-wm" viewBox="66 5.6 141.7 35.93" role="img" aria-label="Rillive"><use href="#wm"/></svg>
+    <span class="hero-lock" id="hero-lock">
+      <svg class="u-mk hero-mk" id="hero-mk" viewBox="0 0 48 48" aria-hidden="true">
+        <rect class="plate" width="48" height="48" rx="10.5763" fill="url(#rl-grad)"/>
+        <g class="face-g">
+          <use href="#rl-face" fill="#fff"/>
+          <!-- 원래 눈 구멍을 메우고, 판형과 같은 그라데이션의 눈동자를 얹는다 -->
+          <circle cx="17.4857" cy="23.0916" r="2.05" fill="#fff"/>
+          <circle cx="31.2006" cy="23.0916" r="2.05" fill="#fff"/>
+          <g class="eyes">
+            <circle class="pupil" cx="17.4857" cy="23.0916" r="1.85" fill="url(#rl-grad)"/>
+            <circle class="pupil" cx="31.2006" cy="23.0916" r="1.85" fill="url(#rl-grad)"/>
+          </g>
+        </g>
+      </svg>
     </span>
-    <p class="kicker eyebrow">Brand System</p>
-    <h1>언제 어디서나 일관된 릴라이브의 목소리</h1>
+    <h1>언제 어디서나 일관된 <svg class="h1-wm" viewBox="66 5.6 141.7 35.93" role="img" aria-label="Rillive"><use href="#wm"/></svg>의 목소리</h1>
     <p class="hero-lead">릴라이브 브랜드 시스템은 올바른 브랜드 경험을 완성하는 공식 가이드라인과 리소스를 제공합니다.</p>
   </div>
-  <hr class="stage-line">
 </header>
 
 <div class="wrap">
@@ -1192,6 +1253,80 @@ table.roles { width: 100%; border-collapse: collapse; min-width: 680px; }
     </div>
   </div>
 
+  <div class="section">
+    <div class="sec-head">
+      <h3 id="s-partner">파트너십 표기</h3>
+      <a class="anchor" href="#s-partner" aria-label="파트너십 표기 섹션 링크">#</a>
+    </div>
+    <p class="sec-desc">다른 브랜드와 함께 노출될 때의 공동 로고 락업과 텍스트 표기 규칙입니다.</p>
+
+    <div class="panel">
+      <div class="measure co-stage">
+        <div>
+          <span class="co-lock">
+            <span class="rl"><svg class="mk" viewBox="0 0 48 48" aria-hidden="true"><use href="#mk"/></svg><svg class="wm" viewBox="66 5.6 141.7 35.93" role="img" aria-label="Rillive"><use href="#wm"/></svg></span>
+            <span class="co-div"></span>
+            <span class="ph"><i></i><b>PARTNER</b></span>
+          </span>
+          <p class="co-note">
+            <span><b>X</b> = 심볼 높이의 1/2</span>
+            <span>구분선 높이 <b>1.5X</b> · 두께 <b>2px</b></span>
+            <span>파트너 로고 높이 = 릴라이브 심볼 높이</span>
+          </p>
+        </div>
+      </div>
+      <div class="toolbar">
+        <div class="tb-text">
+          <p class="panel-title">공동 로고 락업</p>
+          <p class="panel-desc">두 로고 사이에 세로 구분선을 두고 좌우로 X만큼 간격을 확보합니다. X는 보호 여백과 같은 단위이며, 파트너 로고에는 릴라이브 로고와 동일한 보호 여백을 적용합니다.</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid g2">
+      <div class="panel panel-pad" style="margin-top:0">
+        <p class="panel-title">순서와 크기</p>
+        <ul class="rule-list">
+          <li><span class="n">01</span><span>릴라이브가 주최·주관하는 경우 릴라이브 로고를 왼쪽에 둡니다.</span></li>
+          <li><span class="n">02</span><span>파트너의 채널이나 매체에 게재되는 경우, 해당 매체의 주체를 왼쪽에 둡니다.</span></li>
+          <li><span class="n">03</span><span>세 곳 이상이 함께 표기될 때는 주최를 맨 앞에 두고 나머지는 가나다순으로 배열합니다.</span></li>
+          <li><span class="n">04</span><span>파트너 로고는 폭이 아니라 시각적 높이를 릴라이브 심볼에 맞춥니다.</span></li>
+          <li><span class="n">05</span><span>공동 락업에서도 릴라이브 락업은 최소 크기 아래로 줄이지 않습니다.<b>락업 96px · 심볼 24px</b></span></li>
+        </ul>
+      </div>
+      <div class="panel panel-pad" style="margin-top:0">
+        <p class="panel-title">텍스트 표기</p>
+        <ul class="rule-list">
+          <li><span class="n">01</span><span>두 브랜드를 나란히 적을 때는 곱셈 기호를 앞뒤 공백과 함께 씁니다.<b>'릴라이브 × 파트너사'</b></span></li>
+          <li><span class="n">02</span><span>알파벳 x나 대문자 X로 대신하지 않습니다.<b>'릴라이브 x 파트너사' (✕)</b></span></li>
+          <li><span class="n">03</span><span>문장 안에서는 기호 대신 풀어 씁니다.<b>'릴라이브와 파트너사가 함께'</b></span></li>
+          <li><span class="n">04</span><span>브랜드명의 순서는 로고 락업의 순서와 같게 맞춥니다.</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="miss-grid">
+      <div class="miss">
+        <div class="miss-box m-tight">
+          <span class="co-lock"><span class="rl"><svg class="mk" style="width:28px;height:28px" viewBox="0 0 48 48" aria-hidden="true"><use href="#mk"/></svg><svg class="wm" style="width:62px" viewBox="66 5.6 141.7 35.93" role="img" aria-label="Rillive"><use href="#wm"/></svg></span><span class="co-div"></span><span class="ph" style="gap:8px"><i style="width:24px;height:24px;border-width:2px"></i><b style="font-size:13px">PARTNER</b></span></span>
+        </div>
+        <p class="miss-cap"><span class="x" aria-hidden="true">✕</span>구분선과 간격 없이 두 로고를 붙이지 않습니다.</p>
+      </div>
+      <div class="miss">
+        <div class="miss-box m-paint">
+          <span class="co-lock"><span class="rl"><svg class="mk" style="width:28px;height:28px" viewBox="0 0 48 48" aria-hidden="true"><use href="#mk"/></svg><svg class="wm" style="width:62px" viewBox="66 5.6 141.7 35.93" role="img" aria-label="Rillive"><use href="#wm"/></svg></span><span class="co-div"></span><span class="ph" style="gap:8px"><i style="width:24px;height:24px;border-width:2px"></i><b style="font-size:13px">PARTNER</b></span></span>
+        </div>
+        <p class="miss-cap"><span class="x" aria-hidden="true">✕</span>파트너 로고에 릴라이브 컬러를 입히지 않습니다.</p>
+      </div>
+      <div class="miss">
+        <div class="miss-box m-inside">
+          <span class="co-lock"><span class="rl"><svg class="mk" style="width:28px;height:28px" viewBox="0 0 48 48" aria-hidden="true"><use href="#mk"/></svg><svg class="wm" style="width:62px" viewBox="66 5.6 141.7 35.93" role="img" aria-label="Rillive"><use href="#wm"/></svg></span><span class="co-div"></span><span class="ph" style="gap:8px"><i style="width:24px;height:24px;border-width:2px"></i><b style="font-size:13px">PARTNER</b></span></span>
+        </div>
+        <p class="miss-cap"><span class="x" aria-hidden="true">✕</span>파트너 로고를 릴라이브 심볼 판형 안에 넣지 않습니다.</p>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 <div class="section" id="s-changelog">
@@ -1202,6 +1337,7 @@ table.roles { width: 100%; border-collapse: collapse; min-width: 680px; }
   <p class="sec-desc">브랜드 시스템 가이드라인의 업데이트 및 변경 내역을 기록합니다.</p>
   <div class="panel panel-pad">
     <ol class="log">
+      <li><span class="v">v1.1</span><span class="d">2026.09.09</span><span class="t">파트너십 표기 규정 추가. 히어로 구성 정리, 심볼이 커서를 따라 고개를 돌리는 인터랙션 추가.</span></li>
       <li><span class="v">v1.0</span><span class="d">2026.09.09</span><span class="t">릴라이브 브랜드 시스템 공개. 로고·컬러·서체·표기 원칙과 로고 패키지 다운로드.</span></li>
     </ol>
   </div>
@@ -1213,7 +1349,7 @@ table.roles { width: 100%; border-collapse: collapse; min-width: 680px; }
 <div class="foot-host">
   <div class="wrap">
     <footer class="foot">
-      <span>© 2026 REMATCH · 릴라이브 브랜드 시스템 v1.0 · 최종 업데이트 __BUILD_DATE__</span>
+      <span>© 2026 REMATCH · 릴라이브 브랜드 시스템 v1.1 · 최종 업데이트 __BUILD_DATE__</span>
       <span>정본: 릴라이브 DESIGN SYSTEM (FIGMA) · Logo/Logo · Gradient/Main</span>
     </footer>
   </div>
@@ -1388,5 +1524,36 @@ table.roles { width: 100%; border-collapse: collapse; min-width: 680px; }
     }
   }, { rootMargin: '-20% 0px -55% 0px' });
   secs.forEach(function (s) { if (s) obs.observe(s); });
+
+  // 히어로 심볼 — 커서를 따라 고개를 돌리고 눈동자가 움직인다. 닿으면 한 번 튄다.
+  var heroLock = document.getElementById('hero-lock');
+  var heroMk = document.getElementById('hero-mk');
+  var hero = document.querySelector('.hero');
+  if (heroLock && heroMk && hero && !reduceMotion) {
+    var faceG = heroMk.querySelector('.face-g');
+    var pupils = heroMk.querySelectorAll('.pupil');
+    function look(dx, dy) {
+      heroMk.style.setProperty('--ry', (dx * 14).toFixed(2) + 'deg');
+      heroMk.style.setProperty('--rx', (-dy * 9).toFixed(2) + 'deg');
+      faceG.style.setProperty('--fx', (dx * 3.2).toFixed(2) + 'px');
+      faceG.style.setProperty('--fy', (dy * 2.2).toFixed(2) + 'px');
+      pupils.forEach(function (p) {
+        p.style.setProperty('--px', (dx * 1.3).toFixed(2) + 'px');
+        p.style.setProperty('--py', (dy * .9).toFixed(2) + 'px');
+      });
+    }
+    hero.addEventListener('pointermove', function (e) {
+      var r = heroMk.getBoundingClientRect();
+      var dx = Math.max(-1, Math.min(1, (e.clientX - (r.left + r.width / 2)) / 220));
+      var dy = Math.max(-1, Math.min(1, (e.clientY - (r.top + r.height / 2)) / 160));
+      look(dx, dy);
+    });
+    hero.addEventListener('pointerleave', function () { look(0, 0); });
+    heroMk.addEventListener('pointerenter', function () {
+      heroLock.classList.remove('bump'); void heroLock.offsetWidth; heroLock.classList.add('bump');
+    });
+    // 첫 화면에서 한 번 좌우를 둘러본다
+    heroLock.classList.add('wake');
+  }
 })();
 </script>
