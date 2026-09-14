@@ -35,8 +35,8 @@ __FONTFACE__
   --warning: #F0B429;
   --negative: #FF6B6B;
   --nav-bg: rgba(13,12,17,.74);
-  --beam-1: rgba(125,85,255,.30);   /* 스포트라이트 코어 */
-  --beam-2: rgba(80,125,255,.14);
+  --beam-1: rgba(125,85,255,.40);   /* 스포트라이트 코어 */
+  --beam-2: rgba(80,125,255,.19);
   --spec-ring: rgba(255,255,255,.08);
 
   --mono: "Pretendard JP", -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
@@ -60,8 +60,8 @@ __FONTFACE__
   --warning: #8A5A00;
   --negative: #E0332F;
   --nav-bg: rgba(250,250,251,.80);
-  --beam-1: rgba(125,85,255,.13);
-  --beam-2: rgba(80,125,255,.07);
+  --beam-1: rgba(125,85,255,.18);
+  --beam-2: rgba(80,125,255,.10);
   --spec-ring: rgba(20,19,24,.08);
 }
 
@@ -87,7 +87,7 @@ button { font-family: inherit; }
 :focus-visible { outline: 2px solid #FFFFFF; outline-offset: 2px; box-shadow: 0 0 0 5px rgba(10,10,14,.92); }
 
 .mono { font-family: var(--mono); font-variant-numeric: tabular-nums; }
-.roles .num, .roles .on, .log .d, .color-card .c-vals, .size-item .s-lbl { font-variant-numeric: tabular-nums; }
+.roles .num, .roles .on, .color-card .c-vals, .size-item .s-lbl { font-variant-numeric: tabular-nums; }
 .wrap { max-width: 920px; margin: 0 auto; padding: 0 28px; }
 
 /* ── Top bar — 링크 필 없이 얇은 풀블리드 바 ────────── */
@@ -187,16 +187,18 @@ button { font-family: inherit; }
 
 /* ── Hero — 스포트라이트가 켜지는 순간 ──────────────── */
 .hero {
-  position: relative; overflow: hidden; isolation: isolate;
+  position: relative; isolation: isolate;
   padding: clamp(72px, 11vw, 132px) 0 clamp(40px, 5vw, 64px);
   text-align: center;
 }
 /* 위에서 떨어지는 원뿔형 조명 */
 .hero::before {
   content: ""; position: absolute; z-index: -1;
-  left: 50%; top: -34%; width: min(1100px, 140vw); aspect-ratio: 1 / 1;
+  left: 50%; top: -38%; width: min(1180px, 150vw); aspect-ratio: 1 / 1;
   transform: translateX(-50%);
-  background: radial-gradient(circle at 50% 40%, var(--beam-1) 0%, var(--beam-2) 34%, transparent 66%);
+  background: radial-gradient(circle at 50% 40%, var(--beam-1) 0%, var(--beam-2) 36%, transparent 70%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 0%, #000 52%, rgba(0,0,0,.45) 78%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 0%, #000 52%, rgba(0,0,0,.45) 78%, transparent 100%);
   pointer-events: none;
 }
 .hero-lock { display: inline-flex; align-items: center; margin-bottom: 26px; perspective: 420px; }
@@ -531,7 +533,7 @@ table.roles { width: 100%; border-collapse: collapse; min-width: 680px; }
    파트너 로고는 실물을 쓸 수 없으므로 중립 플레이스홀더로 대신한다.
    간격 단위 X는 보호 여백과 같은 값(심볼 높이의 1/2)을 쓴다. */
 .co-stage { min-height: 200px; }
-.co-lock { display: flex; align-items: center; }
+.co-lock { display: flex; align-items: center; justify-content: center; }
 .co-lock .rl { display: flex; align-items: center; gap: 11px; }
 .co-lock .rl .mk { width: 40px; height: 40px; }
 .co-lock .rl .wm { width: 88px; height: auto; fill: var(--ink); }
@@ -547,7 +549,7 @@ table.roles { width: 100%; border-collapse: collapse; min-width: 680px; }
 .ph i { width: 34px; height: 34px; border-radius: 50%; border: 2.5px solid currentColor; flex: none; }
 .ph b { font-size: 17px; font-weight: 700; }
 .co-note {
-  margin-top: 14px; display: flex; gap: 18px; flex-wrap: wrap;
+  margin-top: 14px; display: flex; gap: 18px; flex-wrap: wrap; justify-content: center;
   font-size: 12.5px; color: var(--ink-3);
 }
 .co-note span b { color: var(--ink); font-weight: 700; }
@@ -569,17 +571,6 @@ table.roles { width: 100%; border-collapse: collapse; min-width: 680px; }
   content: ""; width: 12px; height: 12px; border-radius: 50%;
   border: 2px solid #FFFFFF;
 }
-
-/* ── 변경 이력 ──────────────────────────────────────── */
-.log { list-style: none; margin: 16px 0 0; padding: 0; }
-.log li {
-  display: grid; grid-template-columns: 54px 96px 1fr; gap: 14px;
-  padding: 13px 0; border-top: 1px solid var(--line); align-items: baseline;
-}
-.log li:first-child { border-top: 0; }
-.log .v { font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--ink); }
-.log .d { font-family: var(--mono); font-size: 11.5px; color: var(--ink-4); }
-.log .t { font-size: 13px; color: var(--ink-2); }
 
 /* ── 타이포 ─────────────────────────────────────────── */
 .type-stage {
@@ -633,8 +624,6 @@ table.roles { width: 100%; border-collapse: collapse; min-width: 680px; }
 }
 @media (max-width: 720px) {
   .g2, .g3, .miss-grid, .color-grid, .ctx-grid { grid-template-columns: 1fr; }
-  .log li { grid-template-columns: 54px 1fr; }
-  .log .d { grid-column: 2; }
   .color-card.span2 { grid-column: span 1; }
   .nav-mark .ver { display: none; }
   .wrap { padding: 0 20px; }
@@ -736,7 +725,6 @@ table.roles { width: 100%; border-collapse: collapse; min-width: 680px; }
   <a class="r-ch" href="#ch-comm"><i>04</i><span>커뮤니케이션</span></a>
   <a class="r-sec" href="#s-naming" data-ch="#ch-comm">브랜드명 표기 원칙</a>
   <a class="r-sec" href="#s-partner" data-ch="#ch-comm">파트너십 표기</a>
-  <a class="r-ch" href="#s-changelog"><i aria-hidden="true"></i><span>변경 이력</span></a>
 </nav>
 
 <main id="top">
@@ -1327,19 +1315,6 @@ table.roles { width: 100%; border-collapse: collapse; min-width: 680px; }
     </div>
   </div>
 
-</div>
-
-<div class="section" id="s-changelog">
-  <div class="sec-head">
-    <h3>변경 이력</h3>
-    <a class="anchor" href="#s-changelog" aria-label="변경 이력 섹션 링크">#</a>
-  </div>
-  <p class="sec-desc">브랜드 시스템 가이드라인의 업데이트 및 변경 내역을 기록합니다.</p>
-  <div class="panel panel-pad">
-    <ol class="log">
-      <li><span class="v">v1.0.0</span><span class="d">2026.09.14</span><span class="t">릴라이브 브랜드 시스템 공개.</span></li>
-    </ol>
-  </div>
 </div>
 
 </div>
